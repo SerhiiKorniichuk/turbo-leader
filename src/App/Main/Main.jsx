@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Wrapper from './Wrapper/Wrapper'
@@ -19,7 +19,7 @@ const Main = (props) => {
 
 	const classes = useStyles()
 
-	const [open, setOpen] = React.useState(true)
+	const [open, setOpen] = useState(true)
 
 	const handleDrawerOpen = () => {
 		setOpen(true)

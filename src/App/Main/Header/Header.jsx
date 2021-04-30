@@ -8,8 +8,7 @@ import AppBar from '@material-ui/core/AppBar'
 import { makeStyles } from '@material-ui/core/styles'
 import { drawerWidth } from '../Main'
 import Button from '@material-ui/core/Button'
-import { connect } from 'react-redux'
-import { setAuthUserDataWithThunk } from '../../../store/auth/auth-thunks'
+import { useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'
 
 
@@ -48,9 +47,10 @@ const Header = (props) => {
 
 	const classes = useStyles()
 
+	const dispatch = useDispatch()
+
 	const onClick = (e) => {
 		e.preventDefault()
-		props.setAuthUserDataWithThunk(false)
 	}
 
 	return (
@@ -76,14 +76,4 @@ const Header = (props) => {
 	)
 }
 
-const mapStateToProps = ({ auth }) => {
-	return {
-		isLogged: auth.isLogged
-	}
-}
-
-const mapDispatchToProps = {
-	setAuthUserDataWithThunk
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header

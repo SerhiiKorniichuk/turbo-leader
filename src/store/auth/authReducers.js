@@ -2,7 +2,11 @@ export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
 
 let initialState = {
-	isLogged: false
+	username: '',
+	email: '',
+	firstName: '',
+	lastName: '',
+	gender: ''
 }
 
 
@@ -11,11 +15,10 @@ const authReducer = (state = initialState, actions) => {
 		case (SET_AUTH_USER_DATA):
 			return {
 				...state,
-				isLogged: actions.isLogged
+				...actions.userData
 			}
 		default:
 			return state
-
 	}
 }
 

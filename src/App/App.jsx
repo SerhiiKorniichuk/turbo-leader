@@ -1,14 +1,18 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Main from './Main/Main'
 import SignIn from './Main/Auth/Auth'
 import './App.scss'
 
-const App = (props) => {
+
+const App = () => {
+
+	const { username } = useSelector(state => state.auth)
+
 	return (
 		<Route path="/">
-			{props.isLogged
+			{username
 				? <Main />
 				: <SignIn to="/login" />
 			}
@@ -16,10 +20,4 @@ const App = (props) => {
 	)
 }
 
-const mapStateToProps = ({ auth }) => {
-	return {
-		isLogged: auth.isLogged
-	}
-}
-
-export default connect(mapStateToProps, {})(App)
+export default App
