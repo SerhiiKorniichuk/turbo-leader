@@ -10,6 +10,7 @@ import { drawerWidth } from '../Main'
 import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
 import { setAuthUserDataWithThunk } from '../../../store/auth/auth-thunks'
+import {Link} from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,21 +54,23 @@ const Header = (props) => {
 	}
 
 	return (
-		<AppBar position="absolute" className={clsx(classes.appBar, props.open && classes.appBarShift)}>
+		<AppBar position='absolute' className={clsx(classes.appBar, props.open && classes.appBarShift)}>
 			<Toolbar className={classes.toolbar}>
 				<IconButton
-					edge="start"
-					color="inherit"
-					aria-label="open drawer"
+					edge='start'
+					color='inherit'
+					aria-label='open drawer'
 					onClick={props.handleDrawerOpen}
 					className={clsx(classes.menuButton, props.open && classes.menuButtonHidden)}
 				>
 					<MenuIcon />
 				</IconButton>
-				<Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-					Turbo Leader
+				<Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
+					<Link to='/'>
+						Turbo Leader
+					</Link>
 				</Typography>
-				<Button color="inherit" onClick={onClick}>Sing out</Button>
+				<Button color='inherit' onClick={onClick}>Sing out</Button>
 			</Toolbar>
 		</AppBar>
 	)

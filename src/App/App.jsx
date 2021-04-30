@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Main from './Main/Main'
-import SignIn from './SignIn/SignIn'
 import { connect } from 'react-redux'
-
+import Main from './Main/Main'
+import SignIn from './Main/Auth/Auth'
+import './App.scss'
 
 const App = (props) => {
 	return (
