@@ -1,15 +1,10 @@
 import React from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import Typography from '@material-ui/core/Typography'
-import { MenuItem, TextField } from '@material-ui/core'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
-import Link from '@material-ui/core/Link'
-import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
-import { userRegistration } from '../../../../store/auth/authThunks'
+import { signUp } from '../../../../store/auth/authThunks'
+import { Link } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { Grid, MenuItem, TextField, Avatar, Typography, Button, Link as MaterialLink, makeStyles } from '@material-ui/core'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +38,7 @@ const SignUp = (props) => {
 			gender: ''
 		},
 		onSubmit: values => {
-			dispatch(userRegistration(values))
+			dispatch(signUp(values))
 		}
 	})
 
@@ -53,7 +48,7 @@ const SignUp = (props) => {
 				<LockOutlinedIcon/>
 			</Avatar>
 			<Typography component='h1' variant='h5'>
-				Sign up
+				Регистрация аккаунта
 			</Typography>
 			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 				<TextField
@@ -123,13 +118,13 @@ const SignUp = (props) => {
 				/>
 				<TextField
 					select
-					variant="outlined"
-					margin="normal"
+					variant='outlined'
+					margin='normal'
 					required
 					fullWidth
 					name='gender'
 					label='Пол'
-					id="gender"
+					id='gender'
 					value={formik.values.gender}
 					onChange={formik.handleChange}
 				>
@@ -143,12 +138,14 @@ const SignUp = (props) => {
 					color='primary'
 					className={classes.submit}
 				>
-					Sign In
+					Зарегестрироваться
 				</Button>
 				<Grid container>
 					<Grid item>
-						<Link href='#' variant='body2' onClick={() => props.setAuthType('singIn')}>
-							{'Already have an account? Sign in'}
+						<Link to='/auth/sign-in'>
+							<MaterialLink component='span'>
+								Хотите войти в аккаунт?
+							</MaterialLink>
 						</Link>
 					</Grid>
 				</Grid>

@@ -1,10 +1,16 @@
-import axiosBase from '../axios'
+import axios from 'axios'
 
 
 export const authAPI = {
-	userRegistration(authData) {
+	signUp(newAccountData) {
 		return (
-			axiosBase.post(`user/register/`, authData)
+			axios.post(`user/register/`, newAccountData)
+		)
+	},
+
+	signIn(accountData) {
+		return (
+			axios.post(`user/login/`, accountData)
 		)
 	}
 }

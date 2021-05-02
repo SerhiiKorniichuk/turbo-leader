@@ -1,15 +1,12 @@
 import React from 'react'
-import clsx from 'clsx'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import Typography from '@material-ui/core/Typography'
-import AppBar from '@material-ui/core/AppBar'
-import { makeStyles } from '@material-ui/core/styles'
-import { drawerWidth } from '../Main'
-import Button from '@material-ui/core/Button'
 import { useDispatch } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { signOut } from '../../../store/auth/authThunks'
+import { Link } from 'react-router-dom'
+import clsx from 'clsx'
+import { drawerWidth } from '../Main'
+import { Toolbar, IconButton, Typography, AppBar, Button, makeStyles } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,8 +46,9 @@ const Header = (props) => {
 
 	const dispatch = useDispatch()
 
-	const onClick = (e) => {
+	const onSignOut = (e) => {
 		e.preventDefault()
+		dispatch(signOut())
 	}
 
 	return (
@@ -70,7 +68,7 @@ const Header = (props) => {
 						Turbo Leader
 					</Link>
 				</Typography>
-				<Button color='inherit' onClick={onClick}>Sing out</Button>
+				<Button color='inherit' onClick={onSignOut}>Sing out</Button>
 			</Toolbar>
 		</AppBar>
 	)

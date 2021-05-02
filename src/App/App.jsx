@@ -1,22 +1,25 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Route, Redirect } from 'react-router-dom'
 import Main from './Main/Main'
-import SignIn from './Main/Auth/Auth'
+import Auth from './Main/Auth/Auth'
 import './App.scss'
+import { useSelector } from 'react-redux'
 
 
 const App = () => {
 
-	const { username } = useSelector(state => state.auth)
+	const { isLogged } = useSelector(state => state.auth)
 
 	return (
-		<Route path="/">
-			{username
-				? <Main />
-				: <SignIn to="/login" />
-			}
-		</Route>
+		<>
+			<Route path="/">
+				{ isLogged ? <Main /> : <Redirect to='/auth/sign-in' /> }
+			</Route>
+			<Route path='/auth'>
+				{ !isLogged ? <Auth /> : <Redirect to='/' /> }
+			</Route>
+		</>
+
 	)
 }
 

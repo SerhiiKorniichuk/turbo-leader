@@ -1,14 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setAuthUserDataWithThunk } from '../../../../store/auth/authThunks'
-import Avatar from '@material-ui/core/Avatar'
+import { signIn } from '../../../../store/auth/authThunks'
+import { Link } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { Grid, TextField, Avatar, Typography, Button, Link as MaterialLink, makeStyles } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Link from '@material-ui/core/Link'
-import { makeStyles } from '@material-ui/core/styles'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,9 +29,15 @@ const SignIn = (props) => {
 
     const dispatch = useDispatch()
 
-    const onFormSubmit = (e) => {
-        e.preventDefault()
-    }
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            dispatch(signIn(values))
+        }
+    })
 
     return (
         <>
@@ -42,19 +45,21 @@ const SignIn = (props) => {
                 <LockOutlinedIcon/>
             </Avatar>
             <Typography component='h1' variant='h5'>
-                Sign in
+                Вход в аккаунт
             </Typography>
-            <form className={classes.form} noValidate onSubmit={onFormSubmit}>
+            <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                 <TextField
                     variant='outlined'
                     margin='normal'
                     required
                     fullWidth
                     id='email'
-                    label='Email Address'
+                    label='Почта'
                     name='email'
                     autoComplete='email'
                     autoFocus
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
                 />
                 <TextField
                     variant='outlined'
@@ -62,10 +67,12 @@ const SignIn = (props) => {
                     required
                     fullWidth
                     name='password'
-                    label='Password'
+                    label='Пароль'
                     type='password'
                     id='password'
                     autoComplete='current-password'
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
                 />
                 <Button
                     type='submit'
@@ -74,12 +81,14 @@ const SignIn = (props) => {
                     color='primary'
                     className={classes.submit}
                 >
-                    Sign In
+                    Войти
                 </Button>
                 <Grid container>
                     <Grid item>
-                        <Link href='#' variant='body2' onClick={() => props.setAuthType('singUp')}>
-                            {'Don`t have an account? Sign Up'}
+                        <Link to='/auth/sign-up'>
+                            <MaterialLink component='span'>
+                                Хотите зарегистрироваться?
+                            </MaterialLink>
                         </Link>
                     </Grid>
                 </Grid>

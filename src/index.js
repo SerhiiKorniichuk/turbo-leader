@@ -1,16 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store/store'
 import App from './App/App'
+import { history } from './helpers/history'
+import './api/axiosInterceptors'
 
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
       <Provider store={store}>
           <App />
       </Provider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 )
