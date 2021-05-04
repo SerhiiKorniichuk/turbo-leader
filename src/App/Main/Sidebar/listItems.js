@@ -19,7 +19,7 @@ export const mainListItems = (
 				<ListItemText primary='Профиль' />
 			</ListItem>
 		</Link>
-		<Link to='/my-sites'>
+		<Link to='/my_sites'>
 			<ListItem button>
 				<ListItemIcon>
 					<DashboardIcon />

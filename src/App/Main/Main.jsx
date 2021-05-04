@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import { CssBaseline, makeStyles } from '@material-ui/core'
 import Wrapper from './Wrapper/Wrapper'
 import Header from './Header/Header'
 import Sidebar from './Sidebar/Sidebar'

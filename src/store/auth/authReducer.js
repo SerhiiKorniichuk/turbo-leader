@@ -2,12 +2,15 @@ import { localStorageService } from '../../helpers/localStorageService'
 
 
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
+export const WATCH_LOADING = 'WATCH_LOADING'
 
 const hasToken = localStorageService.getAccessToken()
+const userName = localStorageService.getUserName()
 
 let initialState = {
+	isLoading: false,
 	isLogged: !!hasToken,
-	isLoading: false
+	userName: userName
 }
 
 
@@ -16,7 +19,11 @@ const authReducer = (state = initialState, actions) => {
 		case (SET_AUTH_USER_DATA):
 			return {
 				...state,
-				isLogged: actions.isLogged,
+				isLogged: actions.isLogged
+			}
+		case (WATCH_LOADING):
+			return  {
+				...state,
 				isLoading: actions.isLoading
 			}
 		default:

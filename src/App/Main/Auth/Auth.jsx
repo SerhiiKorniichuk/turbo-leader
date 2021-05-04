@@ -2,18 +2,13 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
-import { Box, CssBaseline, Grid, Link as MaterialLink, makeStyles, Paper, Typography } from '@material-ui/core'
+import { Box, CssBaseline, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
 
 
 const Copyright = () => {
 	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{'Copyright © '}
-			<MaterialLink color="inherit" href="https://material-ui.com/">
-				Turbo Leader
-			</MaterialLink>{' '}
-			{new Date().getFullYear()}
-			{'.'}
+		<Typography variant='body2' color='textSecondary' align='center'>
+			Copyright © Turbo Leader {new Date().getFullYear()}.
 		</Typography>
 	)
 }
@@ -26,8 +21,7 @@ const useStyles = makeStyles((theme) => ({
 	image: {
 		backgroundImage: 'url(https://source.unsplash.com/random)',
 		backgroundRepeat: 'no-repeat',
-		backgroundColor:
-			theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+		backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
 		backgroundSize: 'cover',
 		backgroundPosition: 'center'
 	},

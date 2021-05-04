@@ -1,9 +1,18 @@
-import { SET_AUTH_USER_DATA } from './authReducers'
+import { SET_AUTH_USER_DATA } from './authReducer'
+import { WATCH_LOADING } from './authReducer'
 
 
-export const setAuthUserData = (authData) => {
+export const setAuthUserData = ({ isLogged, username }) => {
 	return {
 		type: SET_AUTH_USER_DATA,
-		...authData
+		isLogged: isLogged,
+		userName: username
+	}
+}
+
+export const watchLoading = (isLoading) => {
+	return {
+		type: WATCH_LOADING,
+		isLoading: isLoading
 	}
 }

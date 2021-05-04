@@ -1,13 +1,15 @@
 import { authAPI } from '../../api/auth/authApi'
-import { setAuthUserData } from './authActions'
+import { setAuthUserData, watchLoading } from './authActions'
 import { localStorageService } from '../../helpers/localStorageService'
 import { history } from '../../helpers/history'
 
 
 export const signUp = (newAccountData) => {
 	return (dispatch) => {
+		dispatch(watchLoading(true))
 		authAPI.signUp(newAccountData)
 			.then(response => {
+				dispatch(watchLoading(false))
 				alert(`Пользователь с ником ${response.data.username} создан!`)
 			})
 	}
@@ -15,12 +17,13 @@ export const signUp = (newAccountData) => {
 
 export const signIn = (accountData) => {
 	return (dispatch) => {
-		dispatch(setAuthUserData({ isLoading: true }))
+		dispatch(watchLoading(true))
 		authAPI.signIn(accountData)
 			.then(response => {
+				localStorageService.setUserName(response.data.username)
 				localStorageService.setToken(response.data.token)
-				dispatch(setAuthUserData({ isLoading: false }))
-				dispatch(setAuthUserData({ isLogged: true }))
+				dispatch(setAuthUserData({ isLogged: true, userName: response.data.username }))
+				dispatch(watchLoading(false))
 				history.push('/')
 			})
 			.catch(error => {
@@ -33,9 +36,10 @@ export const signIn = (accountData) => {
 	}
 }
 
+
 export const signOut = () => {
 	return (dispatch) => {
-		localStorageService.clearToken()
+		localStorageService.clearStorage()
 		dispatch(setAuthUserData({ isLogged: false }))
 	}
 }

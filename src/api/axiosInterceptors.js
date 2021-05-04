@@ -7,12 +7,9 @@ axios.defaults.baseURL = API_URL
 
 axios.interceptors.request.use(function (config) {
 	// Do something before request is sent
-	console.log(config)
 	const token = localStorageService.getAccessToken()
 
-	if (token) {
-		config.headers['Authorization'] = 'Basic ' + token
-	}
+	if (token) config.headers['Authorization'] = 'Token ' + token
 
 	console.log(config)
 

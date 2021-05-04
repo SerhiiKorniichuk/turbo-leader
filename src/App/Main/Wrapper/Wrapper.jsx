@@ -1,9 +1,7 @@
 import React from 'react'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
+import { Route } from 'react-router-dom'
+import MySites from '../../pages/MySites/MySites'
+import { Container, Grid, makeStyles } from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,17 +31,15 @@ const Wrapper = (props) => {
 
 	const classes = useStyles()
 
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
 	return (
 		<main className={classes.content}>
 			<div className={classes.appBarSpacer} />
 			<Container maxWidth="lg" className={classes.container}>
 				<Grid container spacing={3}>
 					<Grid item xs={12}>
-						<Paper className={fixedHeightPaper}>
-
-						</Paper>
+						<Route path='/my_sites'>
+							<MySites />
+						</Route>
 					</Grid>
 				</Grid>
 			</Container>
