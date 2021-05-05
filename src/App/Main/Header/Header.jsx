@@ -1,11 +1,12 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { signOut } from '../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { drawerWidth } from '../Main'
-import { Toolbar, IconButton, Typography, AppBar, Button, makeStyles } from '@material-ui/core'
+import { Toolbar, IconButton, Typography, AppBar, makeStyles, MenuItem, Menu } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import { AccountCircle } from '@material-ui/icons'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1
+	},
+	userButton: {
+		borderRadius: '10px'
+	},
+	userButtonText: {
+		marginRight: '10px'
 	}
 }))
 
@@ -43,10 +50,18 @@ const Header = (props) => {
 
 	const classes = useStyles()
 
+	const { userName } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
+
+	const [anchorEl, setAnchorEl] = useState(null)
+	const open = Boolean(anchorEl)
+
+	const handleMenu = (event) => setAnchorEl(event.currentTarget)
+	const handleClose = () => setAnchorEl(null)
 
 	const onSignOut = (e) => {
 		e.preventDefault()
+		handleClose()
 		dispatch(signOut())
 	}
 
@@ -67,7 +82,33 @@ const Header = (props) => {
 						Turbo Leader
 					</Link>
 				</Typography>
-				<Button color='inherit' onClick={onSignOut}>Выйти</Button>
+				<div>
+					<IconButton
+						aria-label="account of current user"
+						aria-controls="menu-appbar"
+						aria-haspopup="true"
+						color="inherit"
+						className={classes.userButton}
+						onClick={handleMenu}
+					>
+						<Typography className={classes.userButtonText}>{userName}</Typography>
+						<AccountCircle />
+					</IconButton>
+					<Menu
+						id="menu-appbar"
+						anchorEl={anchorEl}
+						anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+						keepMounted
+						transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+						open={open}
+						onClose={handleClose}
+					>
+						<MenuItem onClick={handleClose}>
+							<Link to='/profile'>Профиль</Link>
+						</MenuItem>
+						<MenuItem onClick={onSignOut}>Выйти</MenuItem>
+					</Menu>
+				</div>
 			</Toolbar>
 		</AppBar>
 	)

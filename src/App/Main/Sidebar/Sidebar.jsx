@@ -4,10 +4,10 @@ import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
-import { mainListItems } from './listItems'
 import Drawer from '@material-ui/core/Drawer'
 import { makeStyles } from '@material-ui/core/styles'
 import { drawerWidth } from '../Main'
+import SidebarNavigation from './components/SidebarNavigation/SidebarNavigation'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +59,9 @@ const Sidebar = (props) => {
 				</IconButton>
 			</div>
 			<Divider />
-			<List>{mainListItems}</List>
+			<List>
+				<SidebarNavigation />
+			</List>
 		</Drawer>
 	)
 }
