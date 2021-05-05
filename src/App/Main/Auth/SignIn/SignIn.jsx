@@ -1,9 +1,18 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
-import { Grid, TextField, Avatar, Typography, Button, Link as MaterialLink, makeStyles } from '@material-ui/core'
+import {
+    Grid,
+    TextField,
+    Avatar,
+    Typography,
+    Button,
+    Link as MaterialLink,
+    makeStyles,
+    CircularProgress
+} from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 
@@ -18,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1)
     },
     submit: {
-        margin: theme.spacing(3, 0, 2)
+        margin: theme.spacing(3, 0, 2),
     }
 }))
 
@@ -27,6 +36,7 @@ const SignIn = (props) => {
 
     const classes = useStyles()
 
+    const { isLoading } = useSelector(state => state.auth)
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -60,6 +70,7 @@ const SignIn = (props) => {
                     autoFocus
                     value={formik.values.email}
                     onChange={formik.handleChange}
+                    disabled={isLoading}
                 />
                 <TextField
                     variant='outlined'
@@ -73,15 +84,18 @@ const SignIn = (props) => {
                     autoComplete='current-password'
                     value={formik.values.password}
                     onChange={formik.handleChange}
+                    disabled={isLoading}
                 />
                 <Button
                     type='submit'
                     fullWidth
+                    size='large'
                     variant='contained'
                     color='primary'
                     className={classes.submit}
+                    disabled={isLoading}
                 >
-                    Войти
+                    {isLoading ? <CircularProgress color='inherit' size={30} /> : 'Войти'}
                 </Button>
                 <Grid container>
                     <Grid item>

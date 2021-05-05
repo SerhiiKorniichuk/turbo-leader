@@ -2,11 +2,13 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import authReducer from './auth/authReducer'
 import sitesReducers from './sites/sitesReducer'
+import educationReducer from './education/educationReducer'
 
 
 const reducers = combineReducers({
 	auth: authReducer,
-	sites: sitesReducers
+	sites: sitesReducers,
+	education: educationReducer
 })
 
 

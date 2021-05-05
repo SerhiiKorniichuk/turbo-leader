@@ -1,4 +1,4 @@
-import { sitesAPI } from '../../api/sites/sites'
+import { sitesAPI } from '../../api/sites/sitesApi'
 import { setSitesList, watchLoading } from './sitesActions'
 
 

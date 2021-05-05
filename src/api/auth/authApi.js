@@ -7,7 +7,6 @@ export const authAPI = {
 			axios.post(`user/register/`, newAccountData)
 		)
 	},
-
 	signIn(accountData) {
 		return (
 			axios.post(`user/login/`, accountData)

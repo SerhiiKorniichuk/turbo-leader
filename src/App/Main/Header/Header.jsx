@@ -8,7 +8,6 @@ import { Toolbar, IconButton, Typography, AppBar, Button, makeStyles } from '@ma
 import MenuIcon from '@material-ui/icons/Menu'
 
 
-
 const useStyles = makeStyles((theme) => ({
 	toolbar: {
 		paddingRight: 24 // keep right padding when drawer closed
@@ -68,7 +67,7 @@ const Header = (props) => {
 						Turbo Leader
 					</Link>
 				</Typography>
-				<Button color='inherit' onClick={onSignOut}>Sing out</Button>
+				<Button color='inherit' onClick={onSignOut}>Выйти</Button>
 			</Toolbar>
 		</AppBar>
 	)

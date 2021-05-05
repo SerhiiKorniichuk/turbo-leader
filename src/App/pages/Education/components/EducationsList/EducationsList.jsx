@@ -1,0 +1,119 @@
+import React, { useEffect } from 'react'
+import {
+	Button,
+	Card,
+	CardActionArea,
+	CardContent,
+	CardMedia,
+	Chip, Container,
+	Divider,
+	Grid, makeStyles,
+	Typography
+} from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEducationPostsList } from '../../../../../store/education/educationThunks'
+
+
+const useStyles = makeStyles((theme) => ({
+	card: {
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column'
+	},
+	cardLink: {
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column'
+	},
+	cardActionArea: {
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	cardMedia: {
+		paddingTop: '56.25%', // 16:9
+		width: '100%'
+	},
+	cardContent: {
+		height: '100%',
+		width: '100%'
+	},
+	cardDate: {
+		marginBottom: '12px'
+	},
+	cardAddContent: {
+		paddingTop: 0,
+		paddingBottom: '10px',
+		width: '100%',
+	},
+	cardChip: {
+		maxWidth: '100%'
+	}
+}))
+
+
+const EducationsList = (props) => {
+
+	const classes = useStyles()
+
+	const { isLoading, educationPostsList } = useSelector(state => state.education)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(getEducationPostsList())
+	}, [dispatch])
+
+	if (isLoading) return <div />
+
+	return (
+		<Container>
+			<Grid container spacing={4}>
+				{educationPostsList.map((post) => (
+					<Grid item xs={12} sm={6} md={4} key={post.id}>
+						<Link to={`/education/${post.id}`} className={classes.cardLink}>
+							<Card className={classes.card}>
+								<CardActionArea component="div" className={classes.cardActionArea}>
+									<CardMedia
+										className={classes.cardMedia}
+										image="https://source.unsplash.com/random"
+										title={post.title}
+									/>
+									<CardContent className={classes.cardContent}>
+										<Typography className={classes.cardDate} color="textSecondary">
+											{moment.parseZone(post.created).utc(true).format('LLL')}
+										</Typography>
+										<Typography gutterBottom variant="h5" component="h2">
+											{post.title}
+										</Typography>
+										<Typography>
+											{post.text_min}
+										</Typography>
+									</CardContent>
+									<Divider/>
+									<CardContent className={classes.cardAddContent}>
+										<Chip
+											size="small"
+											label={post.keywords}
+											className={classes.cardChip}
+											disabled
+										/>
+									</CardContent>
+									<Divider/>
+									<CardContent className={classes.cardAddContent}>
+										<Button size="small" color="primary">
+											Подробнее
+										</Button>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
+					</Grid>
+				))}
+			</Grid>
+		</Container>
+	)
+}
+
+export default EducationsList

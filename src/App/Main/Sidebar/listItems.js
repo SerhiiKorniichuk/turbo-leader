@@ -35,7 +35,7 @@ export const mainListItems = (
 				<ListItemText primary='Контакты' />
 			</ListItem>
 		</Link>
-		<Link to='/news'>
+		<Link to='/education'>
 			<ListItem button>
 				<ListItemIcon>
 					<AssignmentIcon />

@@ -20,13 +20,8 @@ const Main = (props) => {
 
 	const [open, setOpen] = useState(true)
 
-	const handleDrawerOpen = () => {
-		setOpen(true)
-	}
-
-	const handleDrawerClose = () => {
-		setOpen(false)
-	}
+	const handleDrawerOpen = () => setOpen(true)
+	const handleDrawerClose = () => setOpen(false)
 
 	return (
 		<div className={classes.root}>

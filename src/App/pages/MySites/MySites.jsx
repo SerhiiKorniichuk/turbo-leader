@@ -24,7 +24,7 @@ const MySites = () => {
 
 	const [snackbarView, setSnackbarView] = useState(false)
 
-	const { mySitesList } = useSelector(state => state.sites)
+	const { isLoading, mySitesList } = useSelector(state => state.sites)
 	const { userName } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
@@ -39,6 +39,8 @@ const MySites = () => {
 	const closeSnackbar = () => {
 		setSnackbarView(false)
 	}
+
+	if (isLoading) return <div />
 
 	return (
 		<div className={classes.root}>

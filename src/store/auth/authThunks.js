@@ -12,6 +12,9 @@ export const signUp = (newAccountData) => {
 				dispatch(watchLoading(false))
 				alert(`Пользователь с ником ${response.data.username} создан!`)
 			})
+			.catch(error => {
+				dispatch(watchLoading(false))
+			})
 	}
 }
 
@@ -32,6 +35,7 @@ export const signIn = (accountData) => {
 						console.log(error.response.data.non_field_errors)
 					}
 				}
+				dispatch(watchLoading(false))
 			})
 	}
 }

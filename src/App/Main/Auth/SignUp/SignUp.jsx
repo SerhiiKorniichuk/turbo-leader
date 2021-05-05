@@ -1,9 +1,19 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signUp } from '../../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
-import { Grid, MenuItem, TextField, Avatar, Typography, Button, Link as MaterialLink, makeStyles } from '@material-ui/core'
+import {
+	Grid,
+	MenuItem,
+	TextField,
+	Avatar,
+	Typography,
+	Button,
+	Link as MaterialLink,
+	makeStyles,
+	CircularProgress
+} from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 
@@ -26,6 +36,7 @@ const SignUp = (props) => {
 
 	const classes = useStyles()
 
+	const { isLoading } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
 	const formik = useFormik({
@@ -63,6 +74,7 @@ const SignUp = (props) => {
 					autoFocus
 					value={formik.values.username}
 					onChange={formik.handleChange}
+					disabled={isLoading}
 				/>
 				<TextField
 					variant='outlined'
@@ -76,6 +88,7 @@ const SignUp = (props) => {
 					autoComplete='current-password'
 					value={formik.values.password}
 					onChange={formik.handleChange}
+					disabled={isLoading}
 				/>
 				<TextField
 					variant='outlined'
@@ -89,6 +102,7 @@ const SignUp = (props) => {
 					autoComplete='email'
 					value={formik.values.email}
 					onChange={formik.handleChange}
+					disabled={isLoading}
 				/>
 				<TextField
 					variant='outlined'
@@ -102,6 +116,7 @@ const SignUp = (props) => {
 					autoComplete='first_name'
 					value={formik.values.first_name}
 					onChange={formik.handleChange}
+					disabled={isLoading}
 				/>
 				<TextField
 					variant='outlined'
@@ -115,6 +130,7 @@ const SignUp = (props) => {
 					autoComplete='last_name'
 					value={formik.values.last_name}
 					onChange={formik.handleChange}
+					disabled={isLoading}
 				/>
 				<TextField
 					select
@@ -127,6 +143,7 @@ const SignUp = (props) => {
 					id='gender'
 					value={formik.values.gender}
 					onChange={formik.handleChange}
+					disabled={isLoading}
 				>
 					<MenuItem value='Man' name='Мужчина'>Мужчина</MenuItem>
 					<MenuItem value='Woman' name='Женщина'>Женщина</MenuItem>
@@ -134,11 +151,13 @@ const SignUp = (props) => {
 				<Button
 					type='submit'
 					fullWidth
+					size='large'
 					variant='contained'
 					color='primary'
 					className={classes.submit}
+					disabled={isLoading}
 				>
-					Зарегестрироваться
+					{isLoading ? <CircularProgress color='inherit' size={30} /> : 'Войти'}
 				</Button>
 				<Grid container>
 					<Grid item>

@@ -1,5 +1,4 @@
-import { SET_AUTH_USER_DATA } from './authReducer'
-import { WATCH_LOADING } from './authReducer'
+import { SET_AUTH_USER_DATA, WATCH_LOADING } from './authReducer'
 
 
 export const setAuthUserData = ({ isLogged, username }) => {
