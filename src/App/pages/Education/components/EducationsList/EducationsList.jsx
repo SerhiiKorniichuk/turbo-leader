@@ -77,7 +77,7 @@ const EducationsList = (props) => {
 								<CardActionArea component="div" className={classes.cardActionArea}>
 									<CardMedia
 										className={classes.cardMedia}
-										image="https://source.unsplash.com/random"
+										image={post.main_photo}
 										title={post.title}
 									/>
 									<CardContent className={classes.cardContent}>
@@ -103,7 +103,7 @@ const EducationsList = (props) => {
 									<Divider/>
 									<CardContent className={classes.cardAddContent}>
 										<Button size="small" color="primary">
-											Подробнее
+											Детальніше
 										</Button>
 									</CardContent>
 								</CardActionArea>

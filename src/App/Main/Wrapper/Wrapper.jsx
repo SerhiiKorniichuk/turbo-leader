@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import MySites from '../../pages/MySites/MySites'
-import { Container, Grid, makeStyles } from '@material-ui/core'
 import Education from '../../pages/Education/Education'
+import Payment from '../../pages/Payment/Payment'
+import { Container, Grid, makeStyles } from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +44,9 @@ const Wrapper = (props) => {
 						</Route>
 						<Route path='/education'>
 							<Education />
+						</Route>
+						<Route path='/payment'>
+							<Payment />
 						</Route>
 					</Grid>
 				</Grid>

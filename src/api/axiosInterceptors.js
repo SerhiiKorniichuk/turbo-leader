@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { localStorageService } from '../helpers/localStorageService'
 import { API_URL } from '../config'
+import { history } from '../helpers/history'
 
 
 axios.defaults.baseURL = API_URL
@@ -33,6 +34,11 @@ axios.interceptors.response.use(function (response) {
 	// Do something with response error
 	console.error('Error:', error)
 	console.log(error.response)
+
+	if (error.response.status === 401) {
+		localStorageService.clearStorage()
+		history.push('/')
+	}
 
 	return Promise.reject(error)
 })

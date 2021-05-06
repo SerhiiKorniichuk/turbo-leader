@@ -32,13 +32,8 @@ const MySites = () => {
 		dispatch(getSitesList())
 	}, [dispatch])
 
-	const openSnackbar = () => {
-		setSnackbarView(true)
-	}
-
-	const closeSnackbar = () => {
-		setSnackbarView(false)
-	}
+	const openSnackbar = () => setSnackbarView(true)
+	const closeSnackbar = () => setSnackbarView(false)
 
 	if (isLoading) return <div />
 
@@ -51,16 +46,16 @@ const MySites = () => {
 						aria-controls="panel1a-content"
 						id="panel1a-header"
 					>
-						<Typography className={classes.heading}>{site.product}</Typography>
+						<Typography className={classes.heading}>{site.name}</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Tables siteName={site.name} siteLink={site.link} userName={userName} openSnackbar={openSnackbar} />
+						<Tables productLinks={site.site} userName={userName} openSnackbar={openSnackbar} />
 					</AccordionDetails>
 				</Accordion>
 			))}
 			<Snackbar open={snackbarView} autoHideDuration={3000} onClose={closeSnackbar}>
 				<Alert severity="success">
-					Ссылка успешно скопирована!
+					Посилання успішно скопійовано!
 				</Alert>
 			</Snackbar>
 		</div>

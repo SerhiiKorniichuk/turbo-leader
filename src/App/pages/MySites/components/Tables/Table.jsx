@@ -33,13 +33,13 @@ export const Tables = (props) => {
 
 	const classes = useStyles()
 
-	const copyToClipboard = (e) => {
+	const copyToClipboard = (e, link) => {
 		e.preventDefault()
-		navigator.clipboard.writeText(getSiteRefLink()).then(props.openSnackbar)
+		navigator.clipboard.writeText(getSiteRefLink(link)).then(props.openSnackbar)
 	}
 
-	const getSiteRefLink = () => {
-		return `${props.siteLink}?ref=${props.userName}`
+	const getSiteRefLink = (link) => {
+		return `${link}?ref=${props.userName}`
 	}
 
 	return (
@@ -48,27 +48,29 @@ export const Tables = (props) => {
 				<TableHead>
 					<TableRow>
 						<StyledTableCell>Сайт</StyledTableCell>
-						<StyledTableCell>Ссылка</StyledTableCell>
+						<StyledTableCell>Посилання</StyledTableCell>
 						<StyledTableCell align="right" />
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<StyledTableRow>
-						<StyledTableCell component="th" scope="row">{props.siteName}</StyledTableCell>
-						<StyledTableCell>
-							<MaterialLink href={getSiteRefLink()} target='_blank'>{getSiteRefLink()}</MaterialLink>
-						</StyledTableCell>
-						<StyledTableCell align='right'>
-							<ButtonGroup variant="outlined" color="primary" aria-label="text primary button group">
-								<Button onClick={copyToClipboard}>
-									<FileCopyIcon />
-								</Button>
-								<Button component='a' href={getSiteRefLink()} target='_blank'>
-									<VisibilityIcon />
-								</Button>
-							</ButtonGroup>
-						</StyledTableCell>
-					</StyledTableRow>
+					{ props.productLinks.map((item, index) => (
+						<StyledTableRow key={index}>
+							<StyledTableCell component="th" scope="row">{item.name}</StyledTableCell>
+							<StyledTableCell>
+								<MaterialLink href={getSiteRefLink(item.link)} target='_blank'>{getSiteRefLink(item.link)}</MaterialLink>
+							</StyledTableCell>
+							<StyledTableCell align='right'>
+								<ButtonGroup variant="outlined" color="primary" aria-label="text primary button group">
+									<Button onClick={(e) => copyToClipboard(e, item.link)}>
+										<FileCopyIcon />
+									</Button>
+									<Button component='a' href={getSiteRefLink(item.link)} target='_blank'>
+										<VisibilityIcon />
+									</Button>
+								</ButtonGroup>
+							</StyledTableCell>
+						</StyledTableRow>
+					))}
 				</TableBody>
 			</Table>
 		</TableContainer>

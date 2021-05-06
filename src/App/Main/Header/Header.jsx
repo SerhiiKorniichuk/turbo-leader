@@ -104,9 +104,9 @@ const Header = (props) => {
 						onClose={handleClose}
 					>
 						<MenuItem onClick={handleClose}>
-							<Link to='/profile'>Профиль</Link>
+							<Link to='/profile'>Профіль</Link>
 						</MenuItem>
-						<MenuItem onClick={onSignOut}>Выйти</MenuItem>
+						<MenuItem onClick={onSignOut}>Вийти з аккаунту</MenuItem>
 					</Menu>
 				</div>
 			</Toolbar>

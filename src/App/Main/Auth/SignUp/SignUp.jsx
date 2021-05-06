@@ -59,7 +59,7 @@ const SignUp = (props) => {
 				<LockOutlinedIcon/>
 			</Avatar>
 			<Typography component='h1' variant='h5'>
-				Регистрация аккаунта
+				Створення аккаунта
 			</Typography>
 			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 				<TextField
@@ -68,7 +68,7 @@ const SignUp = (props) => {
 					required
 					fullWidth
 					id='username'
-					label='Никнейм'
+					label='Нікнейм'
 					name='username'
 					autoComplete='username'
 					autoFocus
@@ -96,7 +96,7 @@ const SignUp = (props) => {
 					required
 					fullWidth
 					name='email'
-					label='Почта'
+					label='Пошта'
 					type='email'
 					id='email'
 					autoComplete='email'
@@ -110,7 +110,7 @@ const SignUp = (props) => {
 					required
 					fullWidth
 					name='first_name'
-					label='Имя'
+					label='Ім`я'
 					type='first_name'
 					id='first_name'
 					autoComplete='first_name'
@@ -124,7 +124,7 @@ const SignUp = (props) => {
 					required
 					fullWidth
 					name='last_name'
-					label='Фамилия'
+					label='Прізвище'
 					type='last_name'
 					id='last_name'
 					autoComplete='last_name'
@@ -139,14 +139,14 @@ const SignUp = (props) => {
 					required
 					fullWidth
 					name='gender'
-					label='Пол'
+					label='Стать'
 					id='gender'
 					value={formik.values.gender}
 					onChange={formik.handleChange}
 					disabled={isLoading}
 				>
-					<MenuItem value='Man' name='Мужчина'>Мужчина</MenuItem>
-					<MenuItem value='Woman' name='Женщина'>Женщина</MenuItem>
+					<MenuItem value='Man' name='Чоловік'>Чоловік</MenuItem>
+					<MenuItem value='Woman' name='Жінка'>Жінка</MenuItem>
 				</TextField>
 				<Button
 					type='submit'
@@ -157,13 +157,13 @@ const SignUp = (props) => {
 					className={classes.submit}
 					disabled={isLoading}
 				>
-					{isLoading ? <CircularProgress color='inherit' size={30} /> : 'Войти'}
+					{isLoading ? <CircularProgress color='inherit' size={30} /> : 'Створити аккаунт'}
 				</Button>
 				<Grid container>
 					<Grid item>
 						<Link to='/auth/sign-in'>
 							<MaterialLink component='span'>
-								Хотите войти в аккаунт?
+								Маєте аккаунт? Увійти
 							</MaterialLink>
 						</Link>
 					</Grid>

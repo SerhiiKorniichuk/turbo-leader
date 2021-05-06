@@ -7,46 +7,59 @@ import ListItemText from '@material-ui/core/ListItemText'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import { makeStyles } from '@material-ui/core'
+
+
+const useStyles = makeStyles((theme) => ({
+	listItemIcon: {
+		paddingRight: '16px',
+		display: 'flex',
+		justifyContent: 'center'
+	}
+}))
 
 
 const SidebarNavigation = (props) => {
+
+	const classes = useStyles()
+
 	return (
 		<div>
 			<Link to='/profile'>
 				<ListItem button>
-					<ListItemIcon>
+					<ListItemIcon className={classes.listItemIcon}>
 						<PeopleIcon />
 					</ListItemIcon>
-					<ListItemText primary='Профиль' />
+					<ListItemText primary='Профіль' />
 				</ListItem>
 			</Link>
 			<Link to='/my_sites'>
 				<ListItem button>
-					<ListItemIcon>
+					<ListItemIcon className={classes.listItemIcon}>
 						<DashboardIcon />
 					</ListItemIcon>
-					<ListItemText primary='Мои сайты' />
+					<ListItemText primary='Мої сайти' />
 				</ListItem>
 			</Link>
 			<Link to='/contacts'>
 				<ListItem button>
-					<ListItemIcon>
+					<ListItemIcon className={classes.listItemIcon}>
 						<PeopleIcon />
 					</ListItemIcon>
-					<ListItemText primary='Контакты' />
+					<ListItemText primary='Контакти' />
 				</ListItem>
 			</Link>
 			<Link to='/education'>
 				<ListItem button>
-					<ListItemIcon>
+					<ListItemIcon className={classes.listItemIcon}>
 						<AssignmentIcon />
 					</ListItemIcon>
-					<ListItemText primary='Образование' />
+					<ListItemText primary='Навчання' />
 				</ListItem>
 			</Link>
-			<Link to='/payments'>
+			<Link to='/payment'>
 				<ListItem button>
-					<ListItemIcon>
+					<ListItemIcon className={classes.listItemIcon}>
 						<ShoppingCartIcon />
 					</ListItemIcon>
 					<ListItemText primary='Оплата' />

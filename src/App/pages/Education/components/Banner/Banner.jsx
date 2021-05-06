@@ -38,7 +38,7 @@ const Banner = (props) => {
 
 	return (
 		<>
-			<Paper className={classes.banner}>
+			<Paper className={classes.banner} style={{ backgroundImage: `url(${props.data.main_photo})` }}>
 				<div className={classes.bannerOverlay} />
 				<Grid container>
 					<Grid item md={6}>

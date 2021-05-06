@@ -55,7 +55,7 @@ const SignIn = (props) => {
                 <LockOutlinedIcon/>
             </Avatar>
             <Typography component='h1' variant='h5'>
-                Вход в аккаунт
+                Вхід в аккаунт
             </Typography>
             <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                 <TextField
@@ -64,7 +64,7 @@ const SignIn = (props) => {
                     required
                     fullWidth
                     id='email'
-                    label='Почта'
+                    label='Пошта'
                     name='email'
                     autoComplete='email'
                     autoFocus
@@ -95,13 +95,13 @@ const SignIn = (props) => {
                     className={classes.submit}
                     disabled={isLoading}
                 >
-                    {isLoading ? <CircularProgress color='inherit' size={30} /> : 'Войти'}
+                    {isLoading ? <CircularProgress color='inherit' size={30} /> : 'Увійти'}
                 </Button>
                 <Grid container>
                     <Grid item>
                         <Link to='/auth/sign-up'>
                             <MaterialLink component='span'>
-                                Хотите зарегистрироваться?
+                                Немає аккаунту? Створити
                             </MaterialLink>
                         </Link>
                     </Grid>
