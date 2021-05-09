@@ -25,7 +25,7 @@ const SidebarNavigation = (props) => {
 
 	return (
 		<div>
-			<Link to='/profile'>
+			<Link to='/my_profile'>
 				<ListItem button>
 					<ListItemIcon className={classes.listItemIcon}>
 						<PeopleIcon />

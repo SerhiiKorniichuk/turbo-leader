@@ -4,6 +4,7 @@ import MySites from '../../pages/MySites/MySites'
 import Education from '../../pages/Education/Education'
 import Payment from '../../pages/Payment/Payment'
 import { Container, Grid, makeStyles } from '@material-ui/core'
+import Profile from '../../pages/Profile/Profile'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,9 @@ const Wrapper = (props) => {
 			<Container maxWidth="lg" className={classes.container}>
 				<Grid container spacing={3}>
 					<Grid item xs={12}>
+						<Route path='/my_profile'>
+							<Profile />
+						</Route>
 						<Route path='/my_sites'>
 							<MySites />
 						</Route>

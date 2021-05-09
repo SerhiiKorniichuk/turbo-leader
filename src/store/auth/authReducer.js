@@ -4,13 +4,10 @@ import { localStorageService } from '../../helpers/localStorageService'
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 export const WATCH_LOADING = 'WATCH_LOADING'
 
-const hasToken = localStorageService.getAccessToken()
-const username = localStorageService.getUserName()
 
 let initialState = {
 	is_loading: false,
-	is_logged: !!hasToken,
-	username: username
+	is_logged: !!localStorageService.getAccessToken()
 }
 
 

@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import authReducer from './auth/authReducer'
 import sitesReducers from './sites/sitesReducer'
 import educationReducer from './education/educationReducer'
+import profileReducer from './profile/profileReducer'
 
 
 const reducers = combineReducers({
 	auth: authReducer,
+	profile: profileReducer,
 	sites: sitesReducers,
 	education: educationReducer
 })

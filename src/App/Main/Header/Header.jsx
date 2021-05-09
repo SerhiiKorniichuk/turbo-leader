@@ -103,7 +103,7 @@ const Header = (props) => {
 						open={open}
 						onClose={handleClose}
 					>
-						<Link to='/profile'>
+						<Link to='/my_profile'>
 							<MenuItem onClick={handleClose}>
 								Профіль
 							</MenuItem>

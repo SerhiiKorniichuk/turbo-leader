@@ -4,6 +4,20 @@ import { localStorageService } from '../../helpers/localStorageService'
 import { history } from '../../helpers/history'
 
 
+export const getCurrentUser = () => {
+	return (dispatch) => {
+		dispatch(watchLoading(true))
+		authAPI.getCurrentUser()
+			.then(response => {
+				dispatch(setAuthUserData(response.data))
+				dispatch(watchLoading(false))
+			})
+			.catch(error => {
+				dispatch(watchLoading(false))
+			})
+	}
+}
+
 export const signUp = (newAccountData) => {
 	return (dispatch) => {
 		dispatch(watchLoading(true))
@@ -23,9 +37,8 @@ export const signIn = (accountData) => {
 		dispatch(watchLoading(true))
 		authAPI.signIn(accountData)
 			.then(response => {
-				localStorageService.setUserName(response.data.username)
 				localStorageService.setToken(response.data.token)
-				dispatch(setAuthUserData({ is_logged: true, username: response.data.username }))
+				dispatch(setAuthUserData({ username: response.data.username }))
 				dispatch(watchLoading(false))
 				history.push('/')
 			})
@@ -44,6 +57,6 @@ export const signIn = (accountData) => {
 export const signOut = () => {
 	return (dispatch) => {
 		localStorageService.clearStorage()
-		dispatch(setAuthUserData({ is_logged: false }))
+		dispatch(setAuthUserData({ username: '' }))
 	}
 }

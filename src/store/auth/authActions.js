@@ -1,10 +1,10 @@
 import { SET_AUTH_USER_DATA, WATCH_LOADING } from './authReducer'
 
 
-export const setAuthUserData = ({ is_logged, username }) => {
+export const setAuthUserData = ({ username }) => {
 	return {
 		type: SET_AUTH_USER_DATA,
-		is_logged: is_logged,
+		is_logged: !!username,
 		username: username
 	}
 }
