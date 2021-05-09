@@ -8,15 +8,15 @@ import { useSelector } from 'react-redux'
 
 const App = () => {
 
-	const { isLogged } = useSelector(state => state.auth)
+	const { is_logged } = useSelector(state => state.auth)
 
 	return (
 		<>
 			<Route path="/">
-				{ isLogged ? <Main /> : <Redirect to='/auth/sign-in' /> }
+				{ is_logged ? <Main /> : <Redirect to='/auth/sign-in' /> }
 			</Route>
 			<Route path='/auth'>
-				{ !isLogged ? <Auth /> : <Redirect to='/' /> }
+				{ !is_logged ? <Auth /> : <Redirect to='/' /> }
 			</Route>
 		</>
 

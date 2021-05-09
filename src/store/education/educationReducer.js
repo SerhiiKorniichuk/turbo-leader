@@ -4,9 +4,9 @@ export const WATCH_LOADING = 'WATCH_LOADING'
 
 
 let initialState = {
-	isLoading: false,
-	educationPostsList: [],
-	currentEducationPost: {}
+	is_loading: false,
+	education_posts_list: [],
+	current_education_post: {}
 }
 
 
@@ -15,17 +15,17 @@ const educationReducer = (state = initialState, actions) => {
 		case (SET_EDUCATION_POST_LIST):
 			return {
 				...state,
-				educationPostsList: actions.educationPostsList
+				education_posts_list: actions.education_posts_list
 			}
 		case (SET_EDUCATION_CURRENT_POST):
 			return {
 				...state,
-				currentEducationPost: actions.currentEducationPost
+				current_education_post: actions.current_education_post
 			}
 		case (WATCH_LOADING):
 			return  {
 				...state,
-				isLoading: actions.isLoading
+				is_loading: actions.is_loading
 			}
 		default:
 			return state

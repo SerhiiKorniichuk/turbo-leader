@@ -5,12 +5,12 @@ export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 export const WATCH_LOADING = 'WATCH_LOADING'
 
 const hasToken = localStorageService.getAccessToken()
-const userName = localStorageService.getUserName()
+const username = localStorageService.getUserName()
 
 let initialState = {
-	isLoading: false,
-	isLogged: !!hasToken,
-	userName: userName
+	is_loading: false,
+	is_logged: !!hasToken,
+	username: username
 }
 
 
@@ -19,12 +19,13 @@ const authReducer = (state = initialState, actions) => {
 		case (SET_AUTH_USER_DATA):
 			return {
 				...state,
-				isLogged: actions.isLogged
+				is_logged: actions.is_logged,
+				username: actions.username
 			}
 		case (WATCH_LOADING):
 			return  {
 				...state,
-				isLoading: actions.isLoading
+				is_loading: actions.is_loading
 			}
 		default:
 			return state

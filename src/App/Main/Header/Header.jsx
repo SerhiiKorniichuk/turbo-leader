@@ -50,7 +50,7 @@ const Header = (props) => {
 
 	const classes = useStyles()
 
-	const { userName } = useSelector(state => state.auth)
+	const { username } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
 	const [anchorEl, setAnchorEl] = useState(null)
@@ -91,7 +91,7 @@ const Header = (props) => {
 						className={classes.userButton}
 						onClick={handleMenu}
 					>
-						<Typography className={classes.userButtonText}>{userName}</Typography>
+						<Typography className={classes.userButtonText}>{username}</Typography>
 						<AccountCircle />
 					</IconButton>
 					<Menu
@@ -103,9 +103,11 @@ const Header = (props) => {
 						open={open}
 						onClose={handleClose}
 					>
-						<MenuItem onClick={handleClose}>
-							<Link to='/profile'>Профіль</Link>
-						</MenuItem>
+						<Link to='/profile'>
+							<MenuItem onClick={handleClose}>
+								Профіль
+							</MenuItem>
+						</Link>
 						<MenuItem onClick={onSignOut}>Вийти з аккаунту</MenuItem>
 					</Menu>
 				</div>

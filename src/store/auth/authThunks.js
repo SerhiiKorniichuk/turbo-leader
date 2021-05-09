@@ -25,7 +25,7 @@ export const signIn = (accountData) => {
 			.then(response => {
 				localStorageService.setUserName(response.data.username)
 				localStorageService.setToken(response.data.token)
-				dispatch(setAuthUserData({ isLogged: true, userName: response.data.username }))
+				dispatch(setAuthUserData({ is_logged: true, username: response.data.username }))
 				dispatch(watchLoading(false))
 				history.push('/')
 			})
@@ -44,6 +44,6 @@ export const signIn = (accountData) => {
 export const signOut = () => {
 	return (dispatch) => {
 		localStorageService.clearStorage()
-		dispatch(setAuthUserData({ isLogged: false }))
+		dispatch(setAuthUserData({ is_logged: false }))
 	}
 }

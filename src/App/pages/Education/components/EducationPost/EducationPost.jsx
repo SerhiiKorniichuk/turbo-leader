@@ -28,7 +28,7 @@ const EducationPost = (props) => {
 
 	const classes = useStyles()
 
-	const { isLoading, currentEducationPost } = useSelector(state => state.education)
+	const { is_loading, current_education_post } = useSelector(state => state.education)
 	const dispatch = useDispatch()
 
 	const postId = props.match.params.postId
@@ -38,17 +38,17 @@ const EducationPost = (props) => {
 	}, [dispatch, postId])
 
 	const getPostContent = () => {
-		return {__html: currentEducationPost.text}
+		return {__html: current_education_post.text}
 	}
 
-	if (isLoading) return <div />
+	if (is_loading) return <div />
 
 	return (
 		<>
-			<Banner data={currentEducationPost} />
+			<Banner data={current_education_post} />
 			<div className={classes.postContent}>
 				<Typography component='span' color='textSecondary' className={classes.postDate}>
-					{moment.parseZone(currentEducationPost.created).utc(true).format('LLL')}
+					{ moment.parseZone(current_education_post.created).utc(true).format('LLL') }
 				</Typography>
 				<Divider />
 				<div dangerouslySetInnerHTML={getPostContent()} />

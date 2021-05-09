@@ -58,19 +58,19 @@ const EducationsList = (props) => {
 
 	const classes = useStyles()
 
-	const { isLoading, educationPostsList } = useSelector(state => state.education)
+	const { is_loading, education_posts_list } = useSelector(state => state.education)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(getEducationPostsList())
 	}, [dispatch])
 
-	if (isLoading) return <div />
+	if (is_loading) return <div />
 
 	return (
 		<Container>
 			<Grid container spacing={4}>
-				{educationPostsList.map((post) => (
+				{education_posts_list.map((post) => (
 					<Grid item xs={12} sm={6} md={4} key={post.id}>
 						<Link to={`/education/${post.id}`} className={classes.cardLink}>
 							<Card className={classes.card}>

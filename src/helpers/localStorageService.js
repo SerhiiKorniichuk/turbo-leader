@@ -1,7 +1,7 @@
 export const localStorageService = (function(){
 
-    function _setUserName(userName) {
-        localStorage.setItem('userName', userName)
+    function _setUserName(username) {
+        localStorage.setItem('username', username)
     }
 
     function _setToken(token) {
@@ -9,7 +9,7 @@ export const localStorageService = (function(){
     }
 
     function _getUserName() {
-        return localStorage.getItem('userName')
+        return localStorage.getItem('username')
     }
 
     function _getAccessToken() {

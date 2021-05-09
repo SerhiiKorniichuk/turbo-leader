@@ -39,7 +39,7 @@ export const Tables = (props) => {
 	}
 
 	const getSiteRefLink = (link) => {
-		return `${link}?ref=${props.userName}`
+		return `${link}?ref=${props.username}`
 	}
 
 	return (

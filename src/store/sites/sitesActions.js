@@ -1,16 +1,16 @@
 import { SET_SITES_DATA, WATCH_LOADING } from './sitesReducer'
 
 
-export const setSitesList = (sitesList) => {
+export const setSitesList = (sites_list) => {
 	return {
 		type: SET_SITES_DATA,
-		mySitesList: sitesList
+		my_sites_list: sites_list
 	}
 }
 
-export const watchLoading = (isLoading) => {
+export const watchLoading = (is_loading) => {
 	return {
 		type: WATCH_LOADING,
-		isLoading: isLoading
+		is_loading: is_loading
 	}
 }

@@ -11,5 +11,10 @@ export const authAPI = {
 		return (
 			axios.post(`user/login/`, accountData)
 		)
+	},
+	getCurrentUser() {
+		return (
+			axios.post(`user/detail/`)
+		)
 	}
 }

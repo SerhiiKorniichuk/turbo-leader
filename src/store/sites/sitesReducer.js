@@ -3,8 +3,8 @@ export const WATCH_LOADING = 'WATCH_LOADING'
 
 
 let initialState = {
-	isLoading: false,
-	mySitesList: []
+	is_loading: false,
+	my_sites_list: []
 }
 
 
@@ -13,12 +13,12 @@ const sitesReducer = (state = initialState, actions) => {
 		case (SET_SITES_DATA):
 			return {
 				...state,
-				mySitesList: actions.mySitesList
+				my_sites_list: actions.my_sites_list
 			}
 		case (WATCH_LOADING):
 			return {
 				...state,
-				isLoading: actions.isLoading
+				is_loading: actions.is_loading
 			}
 		default:
 			return state

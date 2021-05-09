@@ -24,8 +24,8 @@ const MySites = () => {
 
 	const [snackbarView, setSnackbarView] = useState(false)
 
-	const { isLoading, mySitesList } = useSelector(state => state.sites)
-	const { userName } = useSelector(state => state.auth)
+	const { is_loading, my_sites_list } = useSelector(state => state.sites)
+	const { username } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -35,11 +35,11 @@ const MySites = () => {
 	const openSnackbar = () => setSnackbarView(true)
 	const closeSnackbar = () => setSnackbarView(false)
 
-	if (isLoading) return <div />
+	if (is_loading) return <div />
 
 	return (
 		<div className={classes.root}>
-			{ mySitesList.map(site => (
+			{ my_sites_list.map(site => (
 				<Accordion key={site.id} defaultExpanded>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -49,7 +49,7 @@ const MySites = () => {
 						<Typography className={classes.heading}>{site.name}</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Tables productLinks={site.site} userName={userName} openSnackbar={openSnackbar} />
+						<Tables productLinks={site.site} username={username} openSnackbar={openSnackbar} />
 					</AccordionDetails>
 				</Accordion>
 			))}
