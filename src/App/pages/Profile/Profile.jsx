@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
-import { MenuItem, Paper, TextField, Typography } from '@material-ui/core'
+import { Button, MenuItem, Paper, TextField, Typography } from '@material-ui/core'
 import ProfileAvatar from './components/ProfileAvatar/ProfileAvatar'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserProfileData } from '../../../store/profile/profileThunks'
+import { editUserProfileData, getUserProfileData } from '../../../store/profile/profileThunks'
 
 
 const useStyles = makeStyles((theme) => ({
+	form: {},
 	profileHeader: {
 		padding: theme.spacing(3),
 		display: 'flex',
@@ -21,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 	profileBody: {
 		padding: theme.spacing(1, 3, 4),
 		marginTop: theme.spacing(3),
-		display: 'flex',
-		justifyContent: 'center'
 	},
-	form: {}
+	profileFooter: {
+		marginTop: theme.spacing(3),
+		display: 'flex',
+		justifyContent: 'flex-end'
+	}
 }))
 
 
@@ -32,9 +35,11 @@ const Profile = (props) => {
 
 	const classes = useStyles()
 
-	const { username } = useSelector(state => state.auth)
+	const { id, username } = useSelector(state => state.auth)
 	const profileData = useSelector(state => state.profile)
 	const dispatch = useDispatch()
+
+	console.log(profileData)
 
 	useEffect(() => {
 		if (username) dispatch(getUserProfileData(username))
@@ -43,37 +48,35 @@ const Profile = (props) => {
 	const formik = useFormik({
 		enableReinitialize: true,
 		initialValues: {
-			first_name: profileData.first_name,
-			last_name: profileData.last_name,
-			email: profileData.email,
+			first_name: profileData.first_name || '',
+			last_name: profileData.last_name || '',
+			email: profileData.email || '',
 			gender: profileData.gender || 'Man',
-			vk_link: profileData.vk_link,
-			fb_link: profileData.fb_link,
-			inst_link: profileData.inst_link,
-			tg_link: profileData.tg_link,
-			wt_link: profileData.wt_link
+			vk_link: profileData.vk_link || '',
+			fb_link: profileData.fb_link || '',
+			inst_link: profileData.inst_link || '',
+			tg_link: profileData.tg_link || '',
+			wt_link: profileData.wt_link || ''
 		},
 		onSubmit: values => {
-			console.log(values)
+			dispatch(editUserProfileData(id, values))
 		}
 	})
 
-	if (profileData.is_loading) return <div/>
-
 	return (
 		<div>
-			<Paper className={classes.profileHeader}>
-				<ProfileAvatar
-					photo={profileData.photo}
-					firstName={profileData.first_name}
-					lastName={profileData.last_name}
-				/>
-				<Typography component='span' variant='h5' className={classes.userName}>
-					{`${profileData.first_name} ${profileData.last_name}`}
-				</Typography>
-			</Paper>
-			<Paper className={classes.profileBody}>
-				<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
+			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
+				<Paper className={classes.profileHeader}>
+					<ProfileAvatar
+						photo={profileData.photo}
+						firstName={profileData.first_name}
+						lastName={profileData.last_name}
+					/>
+					<Typography component='span' variant='h5' className={classes.userName}>
+						{`${profileData.first_name} ${profileData.last_name}`}
+					</Typography>
+				</Paper>
+				<Paper className={classes.profileBody}>
 					<TextField
 						margin='normal'
 						required
@@ -188,8 +191,11 @@ const Profile = (props) => {
 						onChange={formik.handleChange}
 						disabled={false}
 					/>
-				</form>
-			</Paper>
+					<div className={classes.profileFooter}>
+						<Button type='submit' variant="contained" color='primary'>Зберегти</Button>
+					</div>
+				</Paper>
+			</form>
 		</div>
 	)
 }

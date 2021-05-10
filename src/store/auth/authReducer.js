@@ -7,7 +7,9 @@ export const WATCH_LOADING = 'WATCH_LOADING'
 
 let initialState = {
 	is_loading: false,
-	is_logged: !!localStorageService.getAccessToken()
+	is_logged: !!localStorageService.getAccessToken(),
+	id: '',
+	username: ''
 }
 
 
@@ -17,6 +19,7 @@ const authReducer = (state = initialState, actions) => {
 			return {
 				...state,
 				is_logged: actions.is_logged,
+				id: actions.id,
 				username: actions.username
 			}
 		case (WATCH_LOADING):

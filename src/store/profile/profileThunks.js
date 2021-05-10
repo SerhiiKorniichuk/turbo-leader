@@ -12,7 +12,23 @@ export const getUserProfileData = (username) => {
 				dispatch(watchLoading(false))
 			})
 			.catch(error => {
-				if (error.response.data === 401) {
+				if (error.response.status === 401) {
+					dispatch(signOut())
+				}
+				dispatch(watchLoading(false))
+			})
+	}
+}
+
+export const editUserProfileData = (userId, newData) => {
+	return (dispatch) => {
+		dispatch(watchLoading(true))
+		profileApi.editUserProfileData(userId, newData)
+			.then(response => {
+				dispatch(watchLoading(false))
+			})
+			.catch(error => {
+				if (error.response.status === 401) {
 					dispatch(signOut())
 				}
 				dispatch(watchLoading(false))
