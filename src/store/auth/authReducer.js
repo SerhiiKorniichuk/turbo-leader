@@ -9,7 +9,8 @@ let initialState = {
 	is_loading: false,
 	is_logged: !!localStorageService.getAccessToken(),
 	id: '',
-	username: ''
+	username: '',
+	photo: ''
 }
 
 
@@ -20,7 +21,8 @@ const authReducer = (state = initialState, actions) => {
 				...state,
 				is_logged: actions.is_logged,
 				id: actions.id,
-				username: actions.username
+				username: actions.username,
+				photo: actions.photo
 			}
 		case (WATCH_LOADING):
 			return  {

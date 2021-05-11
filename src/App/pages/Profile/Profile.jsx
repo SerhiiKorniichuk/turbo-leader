@@ -12,21 +12,31 @@ const useStyles = makeStyles((theme) => ({
 	profileHeader: {
 		padding: theme.spacing(3),
 		display: 'flex',
-		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	avatarContainer: {
+		marginLeft: theme.spacing(3),
+		marginRight: theme.spacing(3),
+		flex: 'auto',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		textAlign: 'center'
+	},
+	personalInfoContainer: {
+		width: '60%'
 	},
 	userName: {
 		marginTop: theme.spacing(1)
 	},
 	profileBody: {
-		padding: theme.spacing(1, 3, 4),
+		padding: theme.spacing(2, 3, 3),
 		marginTop: theme.spacing(3),
 	},
-	profileFooter: {
-		marginTop: theme.spacing(3),
-		display: 'flex',
-		justifyContent: 'flex-end'
+	profileSaveBtn: {
+		marginTop: theme.spacing(2),
 	}
 }))
 
@@ -39,8 +49,6 @@ const Profile = (props) => {
 	const profileData = useSelector(state => state.profile)
 	const dispatch = useDispatch()
 
-	console.log(profileData)
-
 	useEffect(() => {
 		if (username) dispatch(getUserProfileData(username))
 	}, [dispatch, username])
@@ -48,10 +56,13 @@ const Profile = (props) => {
 	const formik = useFormik({
 		enableReinitialize: true,
 		initialValues: {
+			// photo: profileData.first_name || '',
 			first_name: profileData.first_name || '',
 			last_name: profileData.last_name || '',
 			email: profileData.email || '',
+			bio: profileData.bio || '',
 			gender: profileData.gender || 'Man',
+			referral_link: profileData.referral_link || '',
 			vk_link: profileData.vk_link || '',
 			fb_link: profileData.fb_link || '',
 			inst_link: profileData.inst_link || '',
@@ -67,70 +78,120 @@ const Profile = (props) => {
 		<div>
 			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 				<Paper className={classes.profileHeader}>
-					<ProfileAvatar
-						photo={profileData.photo}
-						firstName={profileData.first_name}
-						lastName={profileData.last_name}
-					/>
-					<Typography component='span' variant='h5' className={classes.userName}>
-						{`${profileData.first_name} ${profileData.last_name}`}
-					</Typography>
+					<div className={classes.avatarContainer}>
+						<ProfileAvatar
+							firstName={profileData.first_name}
+							lastName={profileData.last_name}
+							formikValue={formik.values.photo}
+							formikOnChange={formik.handleChange}
+						/>
+						<Typography component='span' variant='h5' className={classes.userName}>
+							{ (profileData.first_name && profileData.last_name) &&
+								`${profileData.first_name} ${profileData.last_name}`
+							}
+						</Typography>
+						<Button
+							type='submit'
+							variant="contained"
+							color='primary'
+							className={classes.profileSaveBtn}
+							disabled={false}
+						>
+							Зберегти
+						</Button>
+					</div>
+					<div className={classes.personalInfoContainer}>
+						<TextField
+							margin='normal'
+							required
+							fullWidth
+							name='first_name'
+							label='Ім`я'
+							type='first_name'
+							id='first_name'
+							autoComplete='first_name'
+							value={formik.values.first_name}
+							onChange={formik.handleChange}
+							InputLabelProps={{ shrink: true }}
+							disabled={false}
+						/>
+						<TextField
+							margin='normal'
+							required
+							fullWidth
+							name='last_name'
+							label='Прізвище'
+							type='last_name'
+							id='last_name'
+							autoComplete='last_name'
+							value={formik.values.last_name}
+							onChange={formik.handleChange}
+							InputLabelProps={{ shrink: true }}
+							disabled={false}
+						/>
+						<TextField
+							margin='normal'
+							required
+							fullWidth
+							name='email'
+							label='Пошта'
+							type='email'
+							id='email'
+							autoComplete='email'
+							value={formik.values.email}
+							onChange={formik.handleChange}
+							InputLabelProps={{ shrink: true }}
+							disabled={false}
+						/>
+						<TextField
+							select
+							margin='normal'
+							required
+							fullWidth
+							name='gender'
+							label='Стать'
+							id='gender'
+							value={formik.values.gender}
+							onChange={formik.handleChange}
+							InputLabelProps={{ shrink: true }}
+							disabled={false}
+						>
+							<MenuItem value='Man' name='Чоловік'>Чоловік</MenuItem>
+							<MenuItem value='Woman' name='Жінка'>Жінка</MenuItem>
+						</TextField>
+					</div>
 				</Paper>
+
+				<Paper className={classes.profileBody}>
+					<TextField
+						margin='normal'
+						required
+						id='bio'
+						name='bio'
+						label='Додаткова інформація'
+						fullWidth
+						multiline
+						rowsMax={8}
+						value={formik.values.bio}
+						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
+					/>
+				</Paper>
+
 				<Paper className={classes.profileBody}>
 					<TextField
 						margin='normal'
 						required
 						fullWidth
-						name='first_name'
-						label='Ім`я'
-						type='first_name'
-						id='first_name'
-						autoComplete='first_name'
-						value={formik.values.first_name}
+						name='referral_link'
+						label='Реферальне посилання'
+						type='referral_link'
+						id='referral_link'
+						value={formik.values.referral_link}
 						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
 						disabled={false}
 					/>
-					<TextField
-						margin='normal'
-						required
-						fullWidth
-						name='last_name'
-						label='Прізвище'
-						type='last_name'
-						id='last_name'
-						autoComplete='last_name'
-						value={formik.values.last_name}
-						onChange={formik.handleChange}
-						disabled={false}
-					/>
-					<TextField
-						margin='normal'
-						required
-						fullWidth
-						name='email'
-						label='Пошта'
-						type='email'
-						id='email'
-						autoComplete='email'
-						value={formik.values.email}
-						onChange={formik.handleChange}
-						disabled={false}
-					/>
-					<TextField
-						select
-						margin='normal'
-						required
-						fullWidth
-						name='gender'
-						label='Стать'
-						id='gender'
-						value={formik.values.gender}
-						onChange={formik.handleChange}
-						disabled={false}
-					>
-						<MenuItem value='Man' name='Чоловік'>Чоловік</MenuItem>
-						<MenuItem value='Woman' name='Жінка'>Жінка</MenuItem>
-					</TextField>
 					<TextField
 						margin='normal'
 						required
@@ -141,6 +202,7 @@ const Profile = (props) => {
 						id='vk_link'
 						value={formik.values.vk_link}
 						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
 						disabled={false}
 					/>
 					<TextField
@@ -153,6 +215,7 @@ const Profile = (props) => {
 						id='fb_link'
 						value={formik.values.fb_link}
 						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
 						disabled={false}
 					/>
 					<TextField
@@ -165,6 +228,7 @@ const Profile = (props) => {
 						id='inst_link'
 						value={formik.values.inst_link}
 						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
 						disabled={false}
 					/>
 					<TextField
@@ -177,6 +241,7 @@ const Profile = (props) => {
 						id='tg_link'
 						value={formik.values.tg_link}
 						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
 						disabled={false}
 					/>
 					<TextField
@@ -189,11 +254,9 @@ const Profile = (props) => {
 						id='wt_link'
 						value={formik.values.wt_link}
 						onChange={formik.handleChange}
+						InputLabelProps={{ shrink: true }}
 						disabled={false}
 					/>
-					<div className={classes.profileFooter}>
-						<Button type='submit' variant="contained" color='primary'>Зберегти</Button>
-					</div>
 				</Paper>
 			</form>
 		</div>

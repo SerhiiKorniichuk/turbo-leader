@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
 		display: 'block',
 		fontSize: '14px'
 	},
+	'@global': {
+		img: {
+			maxWidth: '100%'
+		}
+	}
 }))
 
 
@@ -51,7 +56,7 @@ const EducationPost = (props) => {
 					{ moment.parseZone(current_education_post.created).utc(true).format('LLL') }
 				</Typography>
 				<Divider />
-				<div dangerouslySetInnerHTML={getPostContent()} />
+				<div className={classes.postInnerHTML} dangerouslySetInnerHTML={getPostContent()} />
 			</div>
 		</>
 	)

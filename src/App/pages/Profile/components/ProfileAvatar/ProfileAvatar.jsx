@@ -1,7 +1,9 @@
 import React from 'react'
-import { Badge, Avatar, IconButton } from '@material-ui/core'
+import { Badge, Avatar, IconButton, Input } from '@material-ui/core'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import { PhotoCamera } from '@material-ui/icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { editUserProfileData } from '../../../../../store/profile/profileThunks'
 
 
 const SmallAvatar = withStyles((theme) => ({
@@ -39,6 +41,9 @@ const ProfileAvatar = (props) => {
 
 	const classes = useStyles()
 
+	const { id } = useSelector(state => state.auth)
+	const dispatch = useDispatch()
+
 	return (
 		<div className={classes.root}>
 			<Badge
@@ -49,7 +54,13 @@ const ProfileAvatar = (props) => {
 				}}
 				badgeContent={
 					<SmallAvatar>
-						<input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+						<Input
+							id="icon-button-file"
+							className={classes.input}
+							accept=".png, .jpg, .jpeg"
+							type="file"
+							onChange={e => dispatch(editUserProfileData(id, { photo: e.target.files[0] }))}
+						/>
 						<label htmlFor="icon-button-file">
 							<IconButton color="secondary" aria-label="upload picture" component="span">
 								<PhotoCamera className={classes.inputIcon} />
@@ -59,7 +70,7 @@ const ProfileAvatar = (props) => {
 				}
 			>
 				<Avatar
-					src={props.photo ? props.photo : ''}
+					src={props.formikValue ? props.formikValue : ''}
 					className={classes.avatar}
 				/>
 			</Badge>

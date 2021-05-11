@@ -71,7 +71,7 @@ const EducationsList = (props) => {
 		<Container>
 			<Grid container spacing={4}>
 				{education_posts_list.map((post) => (
-					<Grid item xs={12} sm={6} md={4} key={post.id}>
+					<Grid item xs={12} sm={12} md={6} lg={4} key={post.id}>
 						<Link to={`/education/${post.id}`} className={classes.cardLink}>
 							<Card className={classes.card}>
 								<CardActionArea component="div" className={classes.cardActionArea}>
