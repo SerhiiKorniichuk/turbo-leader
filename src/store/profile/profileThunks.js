@@ -25,6 +25,7 @@ export const editUserProfileData = (userId, newData) => {
 		dispatch(watchLoading(true))
 		profileApi.editUserProfileData(userId, newData)
 			.then(response => {
+				dispatch(setUserProfileData(newData))
 				dispatch(watchLoading(false))
 			})
 			.catch(error => {

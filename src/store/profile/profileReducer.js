@@ -3,7 +3,9 @@ export const WATCH_LOADING = 'WATCH_LOADING'
 
 
 let initialState = {
-	is_loading: false
+	is_loading: false,
+	first_name: '',
+	last_name: ''
 }
 
 
