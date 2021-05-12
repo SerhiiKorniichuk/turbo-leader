@@ -4,7 +4,7 @@ export const WATCH_LOADING = 'WATCH_LOADING'
 
 let initialState = {
     is_loading: false,
-    default_contacts_list: {}
+    default_contacts_list: []
 }
 
 
