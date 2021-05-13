@@ -24,7 +24,7 @@ const MySites = () => {
 
 	const [snackbarView, setSnackbarView] = useState(false)
 
-	const { is_loading, my_sites_list } = useSelector(state => state.sites)
+	const { my_sites_list } = useSelector(state => state.sites)
 	const { username } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
@@ -34,8 +34,6 @@ const MySites = () => {
 
 	const openSnackbar = () => setSnackbarView(true)
 	const closeSnackbar = () => setSnackbarView(false)
-
-	if (is_loading) return <div />
 
 	return (
 		<div className={classes.root}>
@@ -53,7 +51,12 @@ const MySites = () => {
 					</AccordionDetails>
 				</Accordion>
 			))}
-			<Snackbar open={snackbarView} autoHideDuration={3000} onClose={closeSnackbar}>
+			<Snackbar
+				anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+				open={snackbarView}
+				autoHideDuration={3000}
+				onClose={closeSnackbar}
+			>
 				<Alert severity="success">
 					Посилання успішно скопійовано!
 				</Alert>

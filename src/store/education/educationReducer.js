@@ -12,17 +12,17 @@ let initialState = {
 
 const educationReducer = (state = initialState, actions) => {
 	switch (actions.type) {
-		case (SET_EDUCATION_POST_LIST):
+		case SET_EDUCATION_POST_LIST:
 			return {
 				...state,
 				education_posts_list: actions.education_posts_list
 			}
-		case (SET_EDUCATION_CURRENT_POST):
+		case SET_EDUCATION_CURRENT_POST:
 			return {
 				...state,
 				current_education_post: actions.current_education_post
 			}
-		case (WATCH_LOADING):
+		case WATCH_LOADING:
 			return  {
 				...state,
 				is_loading: actions.is_loading

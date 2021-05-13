@@ -1,13 +1,11 @@
-import React from 'react'
+import React  from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
+import { makeStyles, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
 import PeopleIcon from '@material-ui/icons/People'
-import ListItemText from '@material-ui/core/ListItemText'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import { makeStyles } from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const SidebarNavigation = (props) => {
+export const SidebarNavigation = (props) => {
 
+	const { is_paid } = useSelector(state => state.auth)
 	const classes = useStyles()
 
 	return (
@@ -33,30 +32,36 @@ const SidebarNavigation = (props) => {
 					<ListItemText primary='Профіль' />
 				</ListItem>
 			</Link>
-			<Link to='/my_sites'>
-				<ListItem button>
-					<ListItemIcon className={classes.listItemIcon}>
-						<DashboardIcon />
-					</ListItemIcon>
-					<ListItemText primary='Мої сайти' />
-				</ListItem>
-			</Link>
-			<Link to='/contacts'>
-				<ListItem button>
-					<ListItemIcon className={classes.listItemIcon}>
-						<PeopleIcon />
-					</ListItemIcon>
-					<ListItemText primary='Контакти' />
-				</ListItem>
-			</Link>
-			<Link to='/education'>
-				<ListItem button>
-					<ListItemIcon className={classes.listItemIcon}>
-						<AssignmentIcon />
-					</ListItemIcon>
-					<ListItemText primary='Навчання' />
-				</ListItem>
-			</Link>
+			{ is_paid &&
+				<Link to='/my_sites'>
+					<ListItem button>
+						<ListItemIcon className={classes.listItemIcon}>
+							<DashboardIcon />
+						</ListItemIcon>
+						<ListItemText primary='Мої сайти' />
+					</ListItem>
+				</Link>
+			}
+			{ is_paid &&
+				<Link to='/contacts'>
+					<ListItem button>
+						<ListItemIcon className={classes.listItemIcon}>
+							<PeopleIcon />
+						</ListItemIcon>
+						<ListItemText primary='Контакти' />
+					</ListItem>
+				</Link>
+			}
+			{ is_paid &&
+				<Link to='/education'>
+					<ListItem button>
+						<ListItemIcon className={classes.listItemIcon}>
+							<AssignmentIcon />
+						</ListItemIcon>
+						<ListItemText primary='Навчання' />
+					</ListItem>
+				</Link>
+			}
 			<Link to='/payment'>
 				<ListItem button>
 					<ListItemIcon className={classes.listItemIcon}>
@@ -68,5 +73,3 @@ const SidebarNavigation = (props) => {
 		</div>
 	)
 }
-
-export default SidebarNavigation

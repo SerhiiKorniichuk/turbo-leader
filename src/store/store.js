@@ -5,6 +5,7 @@ import sitesReducers from './sites/sitesReducer'
 import educationReducer from './education/educationReducer'
 import profileReducer from './profile/profileReducer'
 import contactsReducer from './contacts/contactsReducer'
+import paymentReducer from './payment/paymentReducer'
 
 
 const reducers = combineReducers({
@@ -12,7 +13,8 @@ const reducers = combineReducers({
 	profile: profileReducer,
 	sites: sitesReducers,
 	contacts: contactsReducer,
-	education: educationReducer
+	education: educationReducer,
+	payment: paymentReducer
 })
 
 

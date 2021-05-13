@@ -1,19 +1,19 @@
-export const SET_SITES_DATA = 'SET_SITES_DATA'
 export const WATCH_LOADING = 'WATCH_LOADING'
+export const SET_PAYMENT_DATA = 'SET_PAYMENT_DATA'
 
 
 let initialState = {
 	is_loading: false,
-	my_sites_list: []
+	message: ''
 }
 
 
-const sitesReducer = (state = initialState, actions) => {
+const paymentReducer = (state = initialState, actions) => {
 	switch (actions.type) {
-		case SET_SITES_DATA:
+		case SET_PAYMENT_DATA:
 			return {
 				...state,
-				my_sites_list: actions.my_sites_list
+				message: actions.message
 			}
 		case WATCH_LOADING:
 			return {
@@ -25,4 +25,4 @@ const sitesReducer = (state = initialState, actions) => {
 	}
 }
 
-export default sitesReducer
+export default paymentReducer

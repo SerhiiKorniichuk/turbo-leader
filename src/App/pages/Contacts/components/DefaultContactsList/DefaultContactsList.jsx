@@ -6,6 +6,9 @@ import ContactData from '../ContactData/ContactData'
 
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		width: '100%'
+	},
 	contactHeader: {
 		borderBottom: '1px solid rgba(0, 0, 0, .125)',
 		marginBottom: -1,
@@ -38,7 +41,7 @@ export const DefaultContactsList = (props) => {
 	const handleChange = (panel) => (event, newExpanded) => setExpanded(newExpanded ? panel : false)
 
 	return (
-		<div>
+		<div className={classes.root}>
 			{ props.list && props.list.map((contact, index) => (
 				<Accordion
 					key={index}

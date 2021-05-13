@@ -7,7 +7,7 @@ import List from '@material-ui/core/List'
 import Drawer from '@material-ui/core/Drawer'
 import { makeStyles } from '@material-ui/core/styles'
 import { drawerWidth } from '../Main'
-import SidebarNavigation from './components/SidebarNavigation/SidebarNavigation'
+import { SidebarNavigation } from './components/SidebarNavigation/SidebarNavigation'
 
 
 const useStyles = makeStyles((theme) => ({

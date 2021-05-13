@@ -12,17 +12,17 @@ let initialState = {
 
 const contactsReducer = (state = initialState, actions) => {
     switch (actions.type) {
-        case (SET_DEFAULT_CONTACTS):
+        case SET_DEFAULT_CONTACTS:
             return {
                 ...state,
                 default_contacts_list: actions.default_contacts_list
             }
-        case (SET_LENDING_CONTACTS):
+        case SET_LENDING_CONTACTS:
             return {
                 ...state,
                 lending_contacts_list: actions.lending_contacts_list
             }
-        case (WATCH_LOADING):
+        case WATCH_LOADING:
             return  {
                 ...state,
                 is_loading: actions.is_loading

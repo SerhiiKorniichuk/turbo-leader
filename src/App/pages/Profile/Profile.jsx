@@ -8,6 +8,9 @@ import { editUserProfileData, getUserProfileData } from '../../../store/profile/
 
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		width: '100%'
+	},
 	form: {},
 	profileHeader: {
 		padding: theme.spacing(3),
@@ -41,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const Profile = (props) => {
+const Profile = () => {
 
 	const classes = useStyles()
 
@@ -74,7 +77,7 @@ const Profile = (props) => {
 	})
 
 	return (
-		<div>
+		<div className={classes.root}>
 			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 				<Paper className={classes.profileHeader}>
 					<div className={classes.avatarContainer}>

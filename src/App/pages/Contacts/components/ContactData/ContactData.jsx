@@ -44,19 +44,19 @@ const ContactData = (props) => {
 				</>
 			}
 			{ props.siteUrl &&
-			<>
-				<ListItem className={classes.listItem}>
-					<Typography color='primary' className={classes.addText}>
-						Посилання на сайт
-					</Typography>
-					<Typography className={classes.mainText}>
-						<MaterialLink href={props.siteUrl} target='_blank'>
-							{props.siteUrl}
-						</MaterialLink>
-					</Typography>
-				</ListItem>
-				<Divider component="li" />
-			</>
+				<>
+					<ListItem className={classes.listItem}>
+						<Typography color='primary' className={classes.addText}>
+							Посилання на сайт
+						</Typography>
+						<Typography className={classes.mainText}>
+							<MaterialLink href={props.siteUrl} target='_blank'>
+								{props.siteUrl}
+							</MaterialLink>
+						</Typography>
+					</ListItem>
+					<Divider component="li" />
+				</>
 			}
 			{ props.username &&
 				<>

@@ -10,21 +10,23 @@ let initialState = {
 	is_logged: !!localStorageService.getAccessToken(),
 	id: '',
 	username: '',
-	photo: ''
+	photo: '',
+	is_paid: false
 }
 
 
 const authReducer = (state = initialState, actions) => {
 	switch (actions.type) {
-		case (SET_AUTH_USER_DATA):
+		case SET_AUTH_USER_DATA:
 			return {
 				...state,
 				is_logged: actions.is_logged,
 				id: actions.id,
 				username: actions.username,
-				photo: actions.photo
+				photo: actions.photo,
+				is_paid: actions.is_paid
 			}
-		case (WATCH_LOADING):
+		case WATCH_LOADING:
 			return  {
 				...state,
 				is_loading: actions.is_loading

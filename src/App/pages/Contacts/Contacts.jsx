@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { makeStyles } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core'
 import { getDefaultContactsList, getLendingContactsList } from '../../../store/contacts/contactsThunks'
 import { ContactsTabs } from './components/ContantsTabs/ContactsTabs'
 import { DefaultContactsList } from './components/DefaultContactsList/DefaultContactsList'

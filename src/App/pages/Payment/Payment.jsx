@@ -1,8 +1,13 @@
 import {
 	Button, Card, CardActions,
 	CardContent, CardHeader, Container, Divider,
-	Grid, makeStyles, Typography
+	Grid, makeStyles, Snackbar, Typography
 } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
+import { sendPayment } from '../../../store/payment/paymentThunks'
+import Alert from '@material-ui/lab/Alert'
+import React, { useEffect, useState } from 'react'
+import { setPaymentData } from '../../../store/payment/paymentActions'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +51,7 @@ const tiers = [
 	{
 		title: 'Базовий',
 		price: '~ 275',
-		period: '1',
+		period: 1,
 		addText: '9,90$ / 1 місяць',
 		description: ['Повний доступ на 1 місяць'],
 		buttonText: 'Активувати',
@@ -56,7 +61,7 @@ const tiers = [
 		title: 'Макимальний',
 		subheader: 'Найбільш популярний',
 		price: '~ 2 199',
-		period: '12',
+		period: 12,
 		addText: '79,90$ / 12 місяців',
 		description: ['Повний доступ на 12 місяців'],
 		buttonText: 'Активувати',
@@ -65,7 +70,7 @@ const tiers = [
 	{
 		title: 'Стандартний',
 		price: '~ 1 249',
-		period: '6',
+		period: 6,
 		addText: '44,90$ / 6 місяців',
 		description: ['Повний доступ на 6 місяців'],
 		buttonText: 'Активувати',
@@ -77,6 +82,30 @@ const tiers = [
 const Payment = (props) => {
 
 	const classes = useStyles()
+
+	const { message } = useSelector(state => state.payment)
+	const dispatch = useDispatch()
+
+	const [snackbarView, setSnackbarView] = useState(false)
+
+	useEffect(() => {
+		if (message) {
+			openSnackbar()
+		}
+	}, [message])
+
+	const openSnackbar = () => setSnackbarView(true)
+
+	const closeSnackbar = () => {
+		setSnackbarView(false)
+		setTimeout(() => {
+			dispatch(setPaymentData({ message: '' }))
+		}, 500)
+	}
+
+	const onClickPaymentButton = (period) => {
+		dispatch(sendPayment({ end_time: period }))
+	}
 
 	return (
 		<>
@@ -92,7 +121,6 @@ const Payment = (props) => {
 			<Container maxWidth="md" component="main">
 				<Grid container spacing={5} alignItems="flex-end" justify={'center'}>
 					{tiers.map((tier) => (
-						// Enterprise card is full width at sm breakpoint
 						<Grid item key={tier.title} xs={12} sm={12} md={7} lg={4}>
 							<Card>
 								<CardHeader
@@ -131,7 +159,12 @@ const Payment = (props) => {
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<Button fullWidth variant={tier.buttonVariant} color="primary">
+									<Button
+										fullWidth
+										variant={tier.buttonVariant}
+										color="primary"
+										onClick={() => onClickPaymentButton(tier.period)}
+									>
 										{tier.buttonText}
 									</Button>
 								</CardActions>
@@ -139,6 +172,16 @@ const Payment = (props) => {
 						</Grid>
 					))}
 				</Grid>
+				<Snackbar
+					anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+					open={snackbarView}
+				  	autoHideDuration={3000}
+					onClose={closeSnackbar}
+				>
+					<Alert severity="success">
+						{ message }
+					</Alert>
+				</Snackbar>
 			</Container>
 		</>
 	)
