@@ -56,7 +56,6 @@ const Profile = (props) => {
 	const formik = useFormik({
 		enableReinitialize: true,
 		initialValues: {
-			// photo: profileData.first_name || '',
 			first_name: profileData.first_name || '',
 			last_name: profileData.last_name || '',
 			email: profileData.email || '',
@@ -79,12 +78,7 @@ const Profile = (props) => {
 			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 				<Paper className={classes.profileHeader}>
 					<div className={classes.avatarContainer}>
-						<ProfileAvatar
-							firstName={profileData.first_name}
-							lastName={profileData.last_name}
-							formikValue={formik.values.photo}
-							formikOnChange={formik.handleChange}
-						/>
+						<ProfileAvatar />
 						<Typography component='span' variant='h5' className={classes.userName}>
 							{ (profileData.first_name && profileData.last_name) &&
 								`${profileData.first_name} ${profileData.last_name}`

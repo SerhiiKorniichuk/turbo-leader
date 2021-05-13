@@ -25,9 +25,9 @@ export const ContactsTabs = (props) => {
 				textColor="primary"
 				centered
 			>
-				<Tab label='Список #1' />
-				<Tab label='Список #2' />
-				<Tab label='Список #3' disabled />
+				<Tab label='Реферали' />
+				<Tab label='Контакти з лендінгу' />
+				<Tab label='Контакти з боту' disabled />
 			</Tabs>
 		</Paper>
 	)

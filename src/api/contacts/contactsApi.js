@@ -2,14 +2,14 @@ import axios from 'axios'
 
 
 export const contactsApi = {
-    getDefaultAllContacts() {
+    getDefaultContacts() {
         return (
             axios.get(`contact/ref/`)
         )
     },
-    getDefaultContact(id) {
+    getLendingContacts() {
         return (
-            axios.get(`contact/ref/${id}`)
+            axios.get(`contact/lending/`)
         )
     }
 }

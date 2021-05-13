@@ -42,6 +42,7 @@ const ProfileAvatar = (props) => {
 	const classes = useStyles()
 
 	const { id } = useSelector(state => state.auth)
+	const profileData = useSelector(state => state.profile)
 	const dispatch = useDispatch()
 
 	return (
@@ -59,7 +60,11 @@ const ProfileAvatar = (props) => {
 							className={classes.input}
 							accept=".png, .jpg, .jpeg"
 							type="file"
-							onChange={e => dispatch(editUserProfileData(id, { photo: e.target.files[0] }))}
+							onChange={e => {
+								let formData = new FormData()
+								formData.append('photo', e.target.files[0], e.target.files[0].name)
+								dispatch(editUserProfileData(id, formData ))
+							}}
 						/>
 						<label htmlFor="icon-button-file">
 							<IconButton color="secondary" aria-label="upload picture" component="span">
@@ -70,7 +75,7 @@ const ProfileAvatar = (props) => {
 				}
 			>
 				<Avatar
-					src={props.formikValue ? props.formikValue : ''}
+					src={profileData.photo ? profileData.photo : ''}
 					className={classes.avatar}
 				/>
 			</Badge>

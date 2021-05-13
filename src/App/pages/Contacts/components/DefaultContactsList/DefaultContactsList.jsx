@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export const ContactsList = (props) => {
+export const DefaultContactsList = (props) => {
 
 	const classes = useStyles()
 

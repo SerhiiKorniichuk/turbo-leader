@@ -1,10 +1,17 @@
-import {SET_DEFAULT_ALL_CONTACTS, WATCH_LOADING} from './contactsReducer'
+import { SET_DEFAULT_CONTACTS, SET_LENDING_CONTACTS, WATCH_LOADING } from './contactsReducer'
 
 
 export const setDefaultContactsList = (default_contacts_list) => {
     return {
-        type: SET_DEFAULT_ALL_CONTACTS,
+        type: SET_DEFAULT_CONTACTS,
         default_contacts_list: default_contacts_list
+    }
+}
+
+export const setLendingContactsList = (lending_contacts_list) => {
+    return {
+        type: SET_LENDING_CONTACTS,
+        lending_contacts_list: lending_contacts_list
     }
 }
 
