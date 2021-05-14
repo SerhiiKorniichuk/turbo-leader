@@ -2,6 +2,7 @@ import { localStorageService } from '../../helpers/localStorageService'
 
 
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
+export const SET_AUTH_USER_PAYMENT_STATUS = 'SET_AUTH_USER_PAYMENT_STATUS'
 export const WATCH_LOADING = 'WATCH_LOADING'
 
 
@@ -24,6 +25,11 @@ const authReducer = (state = initialState, actions) => {
 				id: actions.id,
 				username: actions.username,
 				photo: actions.photo,
+				is_paid: actions.is_paid
+			}
+		case SET_AUTH_USER_PAYMENT_STATUS:
+			return {
+				...state,
 				is_paid: actions.is_paid
 			}
 		case WATCH_LOADING:

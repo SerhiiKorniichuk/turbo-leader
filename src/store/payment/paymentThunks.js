@@ -1,7 +1,7 @@
 import { setPaymentData, watchLoading } from './paymentActions'
 import { paymentApi } from '../../api/payment/paymentApi'
 import { signOut } from '../auth/authThunks'
-import { setUserProfileData } from '../profile/profileActions'
+import { seAuthUserPaymentStatus } from '../auth/authActions'
 
 
 export const sendPayment = (paymentData) => {
@@ -9,7 +9,7 @@ export const sendPayment = (paymentData) => {
 		dispatch(watchLoading(true))
 		paymentApi.sendPayment(paymentData)
 			.then(response => {
-				dispatch(setUserProfileData({ is_paid: true }))
+				dispatch(seAuthUserPaymentStatus(true))
 				dispatch(setPaymentData(response.data))
 				dispatch(watchLoading(false))
 			})

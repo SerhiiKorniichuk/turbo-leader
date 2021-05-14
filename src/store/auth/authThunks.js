@@ -57,6 +57,11 @@ export const signIn = (accountData) => {
 export const signOut = () => {
 	return (dispatch) => {
 		localStorageService.clearStorage()
-		dispatch(setAuthUserData({ username: '' }))
+		dispatch(setAuthUserData({
+			id: '',
+			username: '',
+			photo: '',
+			is_paid: false
+		}))
 	}
 }
