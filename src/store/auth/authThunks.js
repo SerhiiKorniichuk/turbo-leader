@@ -25,6 +25,7 @@ export const signUp = (newAccountData) => {
 			.then(response => {
 				dispatch(watchLoading(false))
 				alert(`Пользователь с ником ${response.data.username} создан!`)
+				history.push('/auth/sign-in')
 			})
 			.catch(error => {
 				dispatch(watchLoading(false))
@@ -45,6 +46,7 @@ export const signIn = (accountData) => {
 			.catch(error => {
 				if (error.response.status === 400) {
 					if (error.response.data.non_field_errors) {
+						alert(error.response.data.non_field_errors)
 						console.log(error.response.data.non_field_errors)
 					}
 				}

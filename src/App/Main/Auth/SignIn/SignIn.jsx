@@ -3,25 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
-import {
-    Grid,
-    TextField,
-    Avatar,
-    Typography,
-    Button,
-    Link as MaterialLink,
-    makeStyles,
-    CircularProgress
-} from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-
+import { Grid, TextField, Button, Link as MaterialLink, makeStyles, CircularProgress } from '@material-ui/core'
+import { validationSchema } from './validation/validationSchema'
+import { AuthPreviewLogo } from '../components/AuthPreviewLogo/AuthPreviewLogo'
+import { checkFormikFieldsValid } from '../../../../helpers/validation/checkFieldsValid'
 
 
 const useStyles = makeStyles((theme) => ({
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main
-    },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1)
@@ -36,7 +24,7 @@ const SignIn = (props) => {
 
     const classes = useStyles()
 
-    const { isLoading } = useSelector(state => state.auth)
+    const { is_loading } = useSelector(state => state.auth)
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -44,19 +32,20 @@ const SignIn = (props) => {
             email: '',
             password: '',
         },
+        validationSchema,
+        validateOnChange: true,
+        validateOnBlur: true,
         onSubmit: values => {
             dispatch(signIn(values))
         }
     })
 
+    const {errors, values, handleChange} = formik
+    const isDisabled = checkFormikFieldsValid(errors, values) || is_loading
+
     return (
         <>
-            <Avatar className={classes.avatar}>
-                <LockOutlinedIcon/>
-            </Avatar>
-            <Typography component='h1' variant='h5'>
-                Вхід в аккаунт
-            </Typography>
+            <AuthPreviewLogo text='Вхід в аккаунт' />
             <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                 <TextField
                     variant='outlined'
@@ -68,9 +57,10 @@ const SignIn = (props) => {
                     name='email'
                     autoComplete='email'
                     autoFocus
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    disabled={isLoading}
+                    value={values.email}
+                    onChange={handleChange}
+                    disabled={is_loading}
+                    helperText={errors.email && errors.email}
                 />
                 <TextField
                     variant='outlined'
@@ -82,9 +72,10 @@ const SignIn = (props) => {
                     type='password'
                     id='password'
                     autoComplete='current-password'
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    disabled={isLoading}
+                    value={values.password}
+                    onChange={handleChange}
+                    disabled={is_loading}
+                    helperText={errors.password && errors.password}
                 />
                 <Button
                     type='submit'
@@ -93,9 +84,9 @@ const SignIn = (props) => {
                     variant='contained'
                     color='primary'
                     className={classes.submit}
-                    disabled={isLoading}
+                    disabled={isDisabled}
                 >
-                    {isLoading ? <CircularProgress color='inherit' size={30} /> : 'Увійти'}
+                    {is_loading ? <CircularProgress color='inherit' size={30} /> : 'Увійти'}
                 </Button>
                 <Grid container>
                     <Grid item>

@@ -2,6 +2,7 @@ import React  from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { makeStyles, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import PersonIcon from '@material-ui/icons/Person';
 import PeopleIcon from '@material-ui/icons/People'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import AssignmentIcon from '@material-ui/icons/Assignment'
@@ -27,7 +28,7 @@ export const SidebarNavigation = (props) => {
 			<Link to='/my_profile'>
 				<ListItem button>
 					<ListItemIcon className={classes.listItemIcon}>
-						<PeopleIcon />
+						<PersonIcon />
 					</ListItemIcon>
 					<ListItemText primary='Профіль' />
 				</ListItem>

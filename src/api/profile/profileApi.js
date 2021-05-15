@@ -9,9 +9,7 @@ export const profileApi = {
 	},
 	editUserProfileData(userId, newData) {
 		return (
-			axios.patch(`user/edit/${userId}/`, newData, {
-				headers: { 'content-type': 'multipart/form-data' }
-			})
+			axios.patch(`user/edit/${userId}/`, newData)
 		)
 	}
 }

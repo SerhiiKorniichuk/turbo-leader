@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { editUserProfileData, getUserProfileData } from '../../../store/profile/profileThunks'
+import { validationSchema } from './validation/validationSchema'
+import { checkFormikFieldsValid } from '../../../helpers/validation/checkFieldsValid'
+import { comparisonValues } from '../../../helpers/validation/comparisonValues'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
 		width: '60%'
 	},
 	userName: {
-		marginTop: theme.spacing(1)
+		marginTop: theme.spacing(1),
+		height: 32
 	},
 	profileBody: {
 		padding: theme.spacing(2, 3, 3),
@@ -48,7 +52,7 @@ const Profile = () => {
 
 	const classes = useStyles()
 
-	const { id, username } = useSelector(state => state.auth)
+	const { is_loading, id, username } = useSelector(state => state.auth)
 	const profileData = useSelector(state => state.profile)
 	const dispatch = useDispatch()
 
@@ -63,7 +67,7 @@ const Profile = () => {
 			last_name: profileData.last_name || '',
 			email: profileData.email || '',
 			bio: profileData.bio || '',
-			gender: profileData.gender || 'Man',
+			gender: profileData.gender || '',
 			referral_link: profileData.referral_link || '',
 			vk_link: profileData.vk_link || '',
 			fb_link: profileData.fb_link || '',
@@ -71,10 +75,18 @@ const Profile = () => {
 			tg_link: profileData.tg_link || '',
 			wt_link: profileData.wt_link || ''
 		},
+		validationSchema,
+		validateOnChange: true,
+		validateOnBlur: true,
 		onSubmit: values => {
 			dispatch(editUserProfileData(id, values))
 		}
 	})
+
+	const {errors, values, handleChange} = formik
+
+	const isLoading = is_loading || profileData.is_loading
+	const isDisabled = comparisonValues(profileData, values) || checkFormikFieldsValid(errors, values) || isLoading
 
 	return (
 		<div className={classes.root}>
@@ -83,7 +95,7 @@ const Profile = () => {
 					<div className={classes.avatarContainer}>
 						<ProfileAvatar />
 						<Typography component='span' variant='h5' className={classes.userName}>
-							{ (profileData.first_name && profileData.last_name) &&
+							{profileData.first_name && profileData.last_name &&
 								`${profileData.first_name} ${profileData.last_name}`
 							}
 						</Typography>
@@ -92,7 +104,7 @@ const Profile = () => {
 							variant="contained"
 							color='primary'
 							className={classes.profileSaveBtn}
-							disabled={false}
+							disabled={isDisabled}
 						>
 							Зберегти
 						</Button>
@@ -107,10 +119,11 @@ const Profile = () => {
 							type='first_name'
 							id='first_name'
 							autoComplete='first_name'
-							value={formik.values.first_name}
-							onChange={formik.handleChange}
+							value={values.first_name}
+							onChange={handleChange}
 							InputLabelProps={{ shrink: true }}
-							disabled={false}
+							disabled={isLoading}
+							helperText={errors.first_name && errors.first_name}
 						/>
 						<TextField
 							margin='normal'
@@ -121,10 +134,11 @@ const Profile = () => {
 							type='last_name'
 							id='last_name'
 							autoComplete='last_name'
-							value={formik.values.last_name}
-							onChange={formik.handleChange}
+							value={values.last_name}
+							onChange={handleChange}
 							InputLabelProps={{ shrink: true }}
-							disabled={false}
+							disabled={isLoading}
+							helperText={errors.last_name && errors.last_name}
 						/>
 						<TextField
 							margin='normal'
@@ -135,10 +149,11 @@ const Profile = () => {
 							type='email'
 							id='email'
 							autoComplete='email'
-							value={formik.values.email}
-							onChange={formik.handleChange}
+							value={values.email}
+							onChange={handleChange}
 							InputLabelProps={{ shrink: true }}
-							disabled={false}
+							disabled={isLoading}
+							helperText={errors.email && errors.email}
 						/>
 						<TextField
 							select
@@ -148,10 +163,11 @@ const Profile = () => {
 							name='gender'
 							label='Стать'
 							id='gender'
-							value={formik.values.gender}
-							onChange={formik.handleChange}
+							value={values.gender}
+							onChange={handleChange}
 							InputLabelProps={{ shrink: true }}
-							disabled={false}
+							disabled={isLoading}
+							helperText={errors.gender && errors.gender}
 						>
 							<MenuItem value='Man' name='Чоловік'>Чоловік</MenuItem>
 							<MenuItem value='Woman' name='Жінка'>Жінка</MenuItem>
@@ -169,9 +185,11 @@ const Profile = () => {
 						fullWidth
 						multiline
 						rowsMax={8}
-						value={formik.values.bio}
-						onChange={formik.handleChange}
+						value={values.bio}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
+						disabled={isLoading}
+						helperText={errors.bio && errors.bio}
 					/>
 				</Paper>
 
@@ -184,10 +202,11 @@ const Profile = () => {
 						label='Реферальне посилання'
 						type='referral_link'
 						id='referral_link'
-						value={formik.values.referral_link}
-						onChange={formik.handleChange}
+						value={values.referral_link}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
-						disabled={false}
+						disabled={isLoading}
+						helperText={errors.referral_link && errors.referral_link}
 					/>
 					<TextField
 						margin='normal'
@@ -197,10 +216,11 @@ const Profile = () => {
 						label='VK'
 						type='vk_link'
 						id='vk_link'
-						value={formik.values.vk_link}
-						onChange={formik.handleChange}
+						value={values.vk_link}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
-						disabled={false}
+						disabled={isLoading}
+						helperText={errors.vk_link && errors.vk_link}
 					/>
 					<TextField
 						margin='normal'
@@ -210,10 +230,11 @@ const Profile = () => {
 						label='Facebook'
 						type='fb_link'
 						id='fb_link'
-						value={formik.values.fb_link}
-						onChange={formik.handleChange}
+						value={values.fb_link}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
-						disabled={false}
+						disabled={isLoading}
+						helperText={errors.fb_link && errors.fb_link}
 					/>
 					<TextField
 						margin='normal'
@@ -223,10 +244,11 @@ const Profile = () => {
 						label='Instagram'
 						type='inst_link'
 						id='inst_link'
-						value={formik.values.inst_link}
-						onChange={formik.handleChange}
+						value={values.inst_link}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
-						disabled={false}
+						disabled={isLoading}
+						helperText={errors.inst_link && errors.inst_link}
 					/>
 					<TextField
 						margin='normal'
@@ -236,10 +258,11 @@ const Profile = () => {
 						label='Telegram'
 						type='tg_link'
 						id='tg_link'
-						value={formik.values.tg_link}
-						onChange={formik.handleChange}
+						value={values.tg_link}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
-						disabled={false}
+						disabled={isLoading}
+						helperText={errors.tg_link && errors.tg_link}
 					/>
 					<TextField
 						margin='normal'
@@ -249,10 +272,11 @@ const Profile = () => {
 						label='WhatsApp'
 						type='wt_link'
 						id='wt_link'
-						value={formik.values.wt_link}
-						onChange={formik.handleChange}
+						value={values.wt_link}
+						onChange={handleChange}
 						InputLabelProps={{ shrink: true }}
-						disabled={false}
+						disabled={isLoading}
+						helperText={errors.wt_link && errors.wt_link}
 					/>
 				</Paper>
 			</form>

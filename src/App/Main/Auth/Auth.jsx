@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
 import { Box, CssBaseline, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
+import TLMainLogo from './../../../assets/img/logos/TL-main-logo.png'
 
 
 const Copyright = () => {
@@ -19,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
 		height: '100vh'
 	},
 	image: {
-		backgroundImage: 'url(https://source.unsplash.com/random)',
+		backgroundImage: `url(${TLMainLogo})`,
 		backgroundRepeat: 'no-repeat',
 		backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-		backgroundSize: 'cover',
+		backgroundSize: '80%, 80%',
 		backgroundPosition: 'center'
 	},
 	paper: {

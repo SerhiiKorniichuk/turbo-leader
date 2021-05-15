@@ -4,9 +4,9 @@ import { signOut } from '../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { drawerWidth } from '../Main'
-import { Toolbar, IconButton, Typography, AppBar, makeStyles, MenuItem, Menu } from '@material-ui/core'
+import { Toolbar, IconButton, Typography, AppBar, makeStyles, MenuItem, Menu, Avatar } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
-import { AccountCircle } from '@material-ui/icons'
+import TLMiniLogo from './../../../assets/img/logos/TL-mini-logo.png'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +34,16 @@ const useStyles = makeStyles((theme) => ({
 	menuButtonHidden: {
 		display: 'none'
 	},
+	logo: {
+		marginRight: theme.spacing(1),
+		backgroundColor: 'transparent'
+	},
+	avatar: {
+		width: theme.spacing(3),
+		height: theme.spacing(3	),
+		color: theme.palette.primary.main,
+		backgroundColor: 'white'
+	},
 	title: {
 		flexGrow: 1
 	},
@@ -50,7 +60,7 @@ const Header = (props) => {
 
 	const classes = useStyles()
 
-	const { username } = useSelector(state => state.auth)
+	const { username, photo } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
 	const [anchorEl, setAnchorEl] = useState(null)
@@ -77,6 +87,7 @@ const Header = (props) => {
 				>
 					<MenuIcon />
 				</IconButton>
+				<Avatar src={TLMiniLogo} className={classes.logo} />
 				<Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
 					<Link to='/'>
 						Turbo Leader
@@ -92,7 +103,7 @@ const Header = (props) => {
 						onClick={handleMenu}
 					>
 						<Typography className={classes.userButtonText}>{username}</Typography>
-						<AccountCircle />
+						<Avatar src={photo ? photo : ''} className={classes.avatar} />
 					</IconButton>
 					<Menu
 						id="menu-appbar"

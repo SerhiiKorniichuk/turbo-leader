@@ -3,25 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signUp } from '../../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
-import {
-	Grid,
-	MenuItem,
-	TextField,
-	Avatar,
-	Typography,
-	Button,
-	Link as MaterialLink,
-	makeStyles,
-	CircularProgress
-} from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import { Grid, MenuItem, TextField, Button, Link as MaterialLink, makeStyles, CircularProgress } from '@material-ui/core'
+import { validationSchema } from './validation/validationSchema'
+import { AuthPreviewLogo } from '../components/AuthPreviewLogo/AuthPreviewLogo'
+import { checkFormikFieldsValid } from '../../../../helpers/validation/checkFieldsValid'
 
 
 const useStyles = makeStyles((theme) => ({
-	avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main
-	},
 	form: {
 		width: '100%', // Fix IE 11 issue.
 		marginTop: theme.spacing(1)
@@ -36,7 +24,7 @@ const SignUp = (props) => {
 
 	const classes = useStyles()
 
-	const { isLoading } = useSelector(state => state.auth)
+	const { is_loading } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
 	const formik = useFormik({
@@ -48,19 +36,20 @@ const SignUp = (props) => {
 			last_name: '',
 			gender: ''
 		},
+		validationSchema,
+		validateOnChange: true,
+		validateOnBlur: true,
 		onSubmit: values => {
 			dispatch(signUp(values))
 		}
 	})
 
+	const {errors, values, handleChange} = formik
+	const isDisabled = checkFormikFieldsValid(errors, values) || is_loading
+
 	return (
 		<>
-			<Avatar className={classes.avatar}>
-				<LockOutlinedIcon/>
-			</Avatar>
-			<Typography component='h1' variant='h5'>
-				Створення аккаунта
-			</Typography>
+			<AuthPreviewLogo text='Створення аккаунта' />
 			<form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 				<TextField
 					variant='outlined'
@@ -72,9 +61,10 @@ const SignUp = (props) => {
 					name='username'
 					autoComplete='username'
 					autoFocus
-					value={formik.values.username}
-					onChange={formik.handleChange}
-					disabled={isLoading}
+					value={values.username}
+					onChange={handleChange}
+					disabled={is_loading}
+					helperText={errors.username && errors.username}
 				/>
 				<TextField
 					variant='outlined'
@@ -86,9 +76,10 @@ const SignUp = (props) => {
 					type='password'
 					id='password'
 					autoComplete='current-password'
-					value={formik.values.password}
-					onChange={formik.handleChange}
-					disabled={isLoading}
+					value={values.password}
+					onChange={handleChange}
+					disabled={is_loading}
+					helperText={errors.password && errors.password}
 				/>
 				<TextField
 					variant='outlined'
@@ -100,9 +91,10 @@ const SignUp = (props) => {
 					type='email'
 					id='email'
 					autoComplete='email'
-					value={formik.values.email}
-					onChange={formik.handleChange}
-					disabled={isLoading}
+					value={values.email}
+					onChange={handleChange}
+					disabled={is_loading}
+					helperText={errors.email && errors.email}
 				/>
 				<TextField
 					variant='outlined'
@@ -114,9 +106,10 @@ const SignUp = (props) => {
 					type='first_name'
 					id='first_name'
 					autoComplete='first_name'
-					value={formik.values.first_name}
-					onChange={formik.handleChange}
-					disabled={isLoading}
+					value={values.first_name}
+					onChange={handleChange}
+					disabled={is_loading}
+					helperText={errors.first_name && errors.first_name}
 				/>
 				<TextField
 					variant='outlined'
@@ -128,9 +121,10 @@ const SignUp = (props) => {
 					type='last_name'
 					id='last_name'
 					autoComplete='last_name'
-					value={formik.values.last_name}
-					onChange={formik.handleChange}
-					disabled={isLoading}
+					value={values.last_name}
+					onChange={handleChange}
+					disabled={is_loading}
+					helperText={errors.last_name && errors.last_name}
 				/>
 				<TextField
 					select
@@ -141,9 +135,10 @@ const SignUp = (props) => {
 					name='gender'
 					label='Стать'
 					id='gender'
-					value={formik.values.gender}
-					onChange={formik.handleChange}
-					disabled={isLoading}
+					value={values.gender}
+					onChange={handleChange}
+					disabled={is_loading}
+					helperText={errors.gender && errors.gender}
 				>
 					<MenuItem value='Man' name='Чоловік'>Чоловік</MenuItem>
 					<MenuItem value='Woman' name='Жінка'>Жінка</MenuItem>
@@ -155,9 +150,9 @@ const SignUp = (props) => {
 					variant='contained'
 					color='primary'
 					className={classes.submit}
-					disabled={isLoading}
+					disabled={isDisabled}
 				>
-					{isLoading ? <CircularProgress color='inherit' size={30} /> : 'Створити аккаунт'}
+					{is_loading ? <CircularProgress color='inherit' size={30} /> : 'Створити аккаунт'}
 				</Button>
 				<Grid container>
 					<Grid item>
