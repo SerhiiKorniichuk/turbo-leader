@@ -6,6 +6,7 @@ import Education from '../../pages/Education/Education'
 import Payment from '../../pages/Payment/Payment'
 import Profile from '../../pages/Profile/Profile'
 import Contacts from '../../pages/Contacts/Contacts'
+import { useSelector } from 'react-redux'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
 const Wrapper = (props) => {
 
 	const classes = useStyles()
+
+	const {username} = useSelector(state => state.auth)
+
+	if (!username) return <div/>
 
 	return (
 		<main className={classes.content}>

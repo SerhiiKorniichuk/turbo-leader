@@ -5,7 +5,10 @@ import { makeStyles, Paper, Tab, Tabs } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
 	root: {
 		marginBottom: theme.spacing(4),
-		width: '100%'
+		width: '100%',
+	},
+	tab: {
+		padding: '16px'
 	}
 }))
 
@@ -25,9 +28,9 @@ export const ContactsTabs = (props) => {
 				textColor="primary"
 				centered
 			>
-				<Tab label='Реферали' />
-				<Tab label='Контакти з лендінгу' />
-				<Tab label='Контакти з боту' disabled />
+				<Tab label='Реферали' className={classes.tab} />
+				<Tab label='Контакти з лендінгу' className={classes.tab} />
+				<Tab label='Контакти з боту' className={classes.tab} disabled />
 			</Tabs>
 		</Paper>
 	)

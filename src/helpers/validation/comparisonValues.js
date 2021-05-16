@@ -15,6 +15,7 @@ export const comparisonValues = (mainObject, secondaryObject) => {
 			if (key === value && key) {
 				currentValue = key
 			}
+			return null
 		})
 		return currentValue
 	}

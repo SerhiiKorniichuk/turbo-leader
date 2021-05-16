@@ -20,6 +20,22 @@ export const getDefaultContactsList = () => {
     }
 }
 
+export const editDefaultContact = (contactId, contactData) => {
+    return (dispatch) => {
+        dispatch(watchLoading(true))
+        contactsApi.editDefaultContact(contactId, contactData)
+            .then(response => {
+                dispatch(getDefaultContactsList())
+            })
+            .catch(error => {
+                if (error.response.status === 401) {
+                    dispatch(signOut())
+                }
+                dispatch(watchLoading(false))
+            })
+    }
+}
+
 export const getLendingContactsList = () => {
     return (dispatch) => {
         dispatch(watchLoading(true))
@@ -27,6 +43,22 @@ export const getLendingContactsList = () => {
             .then(response => {
                 dispatch(setLendingContactsList(response.data))
                 dispatch(watchLoading(false))
+            })
+            .catch(error => {
+                if (error.response.status === 401) {
+                    dispatch(signOut())
+                }
+                dispatch(watchLoading(false))
+            })
+    }
+}
+
+export const editLendingContact = (contactId, contactData) => {
+    return (dispatch) => {
+        dispatch(watchLoading(true))
+        contactsApi.editLendingContact(contactId, contactData)
+            .then(response => {
+                dispatch(getLendingContactsList())
             })
             .catch(error => {
                 if (error.response.status === 401) {

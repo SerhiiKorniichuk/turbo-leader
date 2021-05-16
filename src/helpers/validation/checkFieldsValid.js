@@ -16,5 +16,9 @@ export const checkFormikFieldsValid = (errors, values) => {
 		}
 	}
 
+	if (values === false) {
+		return Boolean(errorsArray.length)
+	}
+
 	return Boolean(errorsArray.length || !valuesArray.length)
 }

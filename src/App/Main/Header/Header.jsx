@@ -34,18 +34,24 @@ const useStyles = makeStyles((theme) => ({
 	menuButtonHidden: {
 		display: 'none'
 	},
-	logo: {
-		marginRight: theme.spacing(1),
+	logoContainer: {
+		flexGrow: 1,
+		display: 'flex',
+		alignItems: 'center'
+	},
+	logoContainerInner: {
+		display: 'inline-flex',
+		alignItems: 'center',
 		backgroundColor: 'transparent'
+	},
+	logo: {
+		marginRight: theme.spacing(1)
 	},
 	avatar: {
 		width: theme.spacing(3),
 		height: theme.spacing(3	),
 		color: theme.palette.primary.main,
 		backgroundColor: 'white'
-	},
-	title: {
-		flexGrow: 1
 	},
 	userButton: {
 		borderRadius: '10px'
@@ -87,12 +93,14 @@ const Header = (props) => {
 				>
 					<MenuIcon />
 				</IconButton>
-				<Avatar src={TLMiniLogo} className={classes.logo} />
-				<Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
-					<Link to='/'>
-						Turbo Leader
+				<div className={classes.logoContainer}>
+					<Link to='/' className={classes.logoContainerInner}>
+						<Avatar src={TLMiniLogo} className={classes.logo} />
+						<Typography component='h1' variant='h6' color='inherit' noWrap>
+							Turbo Leader
+						</Typography>
 					</Link>
-				</Typography>
+				</div>
 				<div>
 					<IconButton
 						aria-label="account of current user"

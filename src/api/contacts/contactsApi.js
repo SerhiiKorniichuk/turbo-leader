@@ -7,9 +7,19 @@ export const contactsApi = {
             axios.get(`contact/ref/`)
         )
     },
+    editDefaultContact(contactId, contactData) {
+        return (
+            axios.patch(`contact/${contactId}/`, contactData)
+        )
+    },
     getLendingContacts() {
         return (
             axios.get(`contact/lending/`)
         )
-    }
+    },
+    editLendingContact(contactId, contactData) {
+        return (
+            axios.patch(`contact/lending/${contactId}/`, contactData)
+        )
+    },
 }

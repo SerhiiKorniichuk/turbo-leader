@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core'
 import { getDefaultContactsList, getLendingContactsList } from '../../../store/contacts/contactsThunks'
 import { ContactsTabs } from './components/ContantsTabs/ContactsTabs'
-import { DefaultContactsList } from './components/DefaultContactsList/DefaultContactsList'
-import { LendingContactsList } from './components/LendingContactsList/LendingContactsList'
+import { ContactsList } from './components/ContactsList/ContactsList'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,8 +33,8 @@ const Contacts = () => {
     return (
         <div className={classes.root}>
             <ContactsTabs value={selectedTab} onChange={setSelectedTab} />
-            { selectedTab === 0 && <DefaultContactsList list={default_contacts_list} />}
-            { selectedTab === 1 && <LendingContactsList list={lending_contacts_list} />}
+            {selectedTab === 0 && <ContactsList type='default' list={default_contacts_list} />}
+            {selectedTab === 1 && <ContactsList type='lending' list={lending_contacts_list} />}
         </div>
     )
 }

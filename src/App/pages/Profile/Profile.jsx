@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	userName: {
 		marginTop: theme.spacing(1),
-		height: 32
+		minHeight: 32
 	},
 	profileBody: {
 		padding: theme.spacing(2, 3, 3),

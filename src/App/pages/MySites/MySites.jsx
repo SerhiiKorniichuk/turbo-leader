@@ -1,11 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles, Accordion, AccordionSummary, AccordionDetails, Typography, Snackbar } from '@material-ui/core'
+import {
+	makeStyles, Accordion, AccordionSummary,
+	AccordionDetails, Typography, Snackbar, withStyles
+} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Alert from '@material-ui/lab/Alert'
 import { Tables } from './components/Tables/Table'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSitesList } from '../../../store/sites/sitesThunks'
 
+
+const AccordionHeader = withStyles({
+	root: {
+		// backgroundColor: 'rgba(0, 0, 0, .03)',
+		borderBottom: '1px solid rgba(0, 0, 0, .125)',
+		marginBottom: -1,
+		minHeight: 56,
+		'&$expanded': {
+			minHeight: 56,
+		},
+	},
+	content: {
+		'&$expanded': {
+			margin: '12px 0',
+		},
+	},
+	expanded: {},
+})(AccordionSummary)
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -39,13 +60,13 @@ const MySites = () => {
 		<div className={classes.root}>
 			{ my_sites_list.map(site => (
 				<Accordion key={site.id} defaultExpanded>
-					<AccordionSummary
+					<AccordionHeader
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
 						id="panel1a-header"
 					>
 						<Typography className={classes.heading}>{site.name}</Typography>
-					</AccordionSummary>
+					</AccordionHeader>
 					<AccordionDetails>
 						<Tables productLinks={site.site} username={username} openSnackbar={openSnackbar} />
 					</AccordionDetails>

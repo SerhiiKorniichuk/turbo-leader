@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const ContactData = (props) => {
+export const ContactMainData = (props) => {
 
 	const classes = useStyles()
 
@@ -34,7 +34,7 @@ const ContactData = (props) => {
 				<>
 					<ListItem className={classes.listItem}>
 						<Typography color='primary' className={classes.addText}>
-							Ім'я
+							Ім`я
 						</Typography>
 						<Typography className={classes.mainText}>
 							{props.name}
@@ -75,7 +75,7 @@ const ContactData = (props) => {
 				<>
 					<ListItem className={classes.listItem}>
 						<Typography color='primary' className={classes.addText}>
-							Ім'я та прізвище
+							Ім`я та прізвище
 						</Typography>
 						<Typography className={classes.mainText}>
 							{props.firstName} {props.lastName}
@@ -85,17 +85,30 @@ const ContactData = (props) => {
 				</>
 			}
 			{ props.email &&
-				<ListItem className={classes.listItem}>
-					<Typography color='primary' className={classes.addText}>
-						Почта
-					</Typography>
-					<Typography className={classes.mainText}>
-						{props.email}
-					</Typography>
-				</ListItem>
+				<>
+					<ListItem className={classes.listItem}>
+						<Typography color='primary' className={classes.addText}>
+							Почта
+						</Typography>
+						<Typography className={classes.mainText}>
+							{props.email}
+						</Typography>
+					</ListItem>
+				</>
+			}
+			{ props.numberPhone &&
+				<>
+					<Divider component="li" />
+					<ListItem className={classes.listItem}>
+						<Typography color='primary' className={classes.addText}>
+							Телефон
+						</Typography>
+						<Typography className={classes.mainText}>
+							{props.numberPhone}
+						</Typography>
+					</ListItem>
+				</>
 			}
 		</List>
 	)
 }
-
-export default ContactData
