@@ -44,7 +44,7 @@ export const signIn = (accountData) => {
 				history.push('/')
 			})
 			.catch(error => {
-				if (error.response.status === 400) {
+				if (error.response && error.response.status === 400) {
 					if (error.response.data.non_field_errors) {
 						alert(error.response.data.non_field_errors)
 						console.log(error.response.data.non_field_errors)
