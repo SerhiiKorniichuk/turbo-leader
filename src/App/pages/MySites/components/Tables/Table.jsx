@@ -1,7 +1,7 @@
 import React from 'react'
 import {
 	withStyles, makeStyles, Table, TableBody,
-	TableCell, TableContainer, TableHead, TableRow, Link as MaterialLink, ButtonGroup, Button
+	TableCell, TableContainer, TableHead, TableRow, Link as MaterialLink, ButtonGroup, Button, Tooltip
 } from '@material-ui/core'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
 import VisibilityIcon from '@material-ui/icons/Visibility'
@@ -61,12 +61,16 @@ export const Tables = (props) => {
 							</StyledTableCell>
 							<StyledTableCell align='right'>
 								<ButtonGroup variant="outlined" color="primary" aria-label="text primary button group">
-									<Button onClick={(e) => copyToClipboard(e, item.link)}>
-										<FileCopyIcon />
-									</Button>
-									<Button component='a' href={getSiteRefLink(item.link)} target='_blank'>
-										<VisibilityIcon />
-									</Button>
+									<Tooltip title="Скопіювати">
+										<Button onClick={(e) => copyToClipboard(e, item.link)}>
+											<FileCopyIcon />
+										</Button>
+									</Tooltip>
+									<Tooltip title="Переглянути">
+										<Button component='a' href={getSiteRefLink(item.link)} target='_blank'>
+											<VisibilityIcon />
+										</Button>
+									</Tooltip>
 								</ButtonGroup>
 							</StyledTableCell>
 						</StyledTableRow>
