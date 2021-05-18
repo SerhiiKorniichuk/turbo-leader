@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
 import { Box, CssBaseline, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
@@ -45,8 +45,8 @@ const Auth = (props) => {
 			<Grid item xs={false} sm={4} md={7} className={classes.image} />
 			<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
 				<div className={classes.paper}>
-					<Route path='/auth/sign-in' component={SignIn} />
-					<Route path='/auth/sign-up' component={SignUp} />
+					<Route exact path='/auth/sign-in' component={SignIn} />
+					<Route exact path='/auth/sign-up' component={SignUp} />
 					<Box mt={5}>
 						<Copyright />
 					</Box>
