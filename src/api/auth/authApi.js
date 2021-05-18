@@ -2,7 +2,12 @@ import axios from 'axios'
 
 
 export const authAPI = {
-	signUp(newAccountData) {
+	signUp(newAccountData, referralUser) {
+		if (referralUser && typeof referralUser === 'string') {
+			return (
+				axios.post(`user/register/?ref=${referralUser}`, newAccountData)
+			)
+		}
 		return (
 			axios.post(`user/register/`, newAccountData)
 		)

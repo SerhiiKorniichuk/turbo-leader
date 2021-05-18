@@ -18,12 +18,13 @@ export const getCurrentUser = () => {
 	}
 }
 
-export const signUp = (newAccountData) => {
+export const signUp = (newAccountData, referralUser) => {
 	return (dispatch) => {
 		dispatch(watchLoading(true))
-		authAPI.signUp(newAccountData)
+		authAPI.signUp(newAccountData, referralUser)
 			.then(response => {
 				dispatch(watchLoading(false))
+				localStorageService.clearReferralUser()
 				alert(`Пользователь с ником ${response.data.username} создан!`)
 				history.push('/auth/sign-in')
 			})
@@ -38,7 +39,7 @@ export const signIn = (accountData) => {
 		dispatch(watchLoading(true))
 		authAPI.signIn(accountData)
 			.then(response => {
-				localStorageService.setToken(response.data.token)
+				localStorageService.setAccessToken(response.data.token)
 				dispatch(setAuthUserData({ username: response.data.username }))
 				dispatch(watchLoading(false))
 				history.push('/')

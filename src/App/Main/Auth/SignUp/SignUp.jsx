@@ -7,6 +7,7 @@ import { Grid, MenuItem, TextField, Button, Link as MaterialLink, makeStyles, Ci
 import { validationSchema } from './validation/validationSchema'
 import { AuthPreviewLogo } from '../components/AuthPreviewLogo/AuthPreviewLogo'
 import { checkFormikFieldsValid } from '../../../../helpers/validation/checkFieldsValid'
+import { localStorageService } from '../../../../helpers/localStorageService'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,8 @@ const SignUp = (props) => {
 	const { is_loading } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
+	const referralUser = localStorageService.getReferralUser()
+
 	const formik = useFormik({
 		initialValues: {
 			username: '',
@@ -40,7 +43,7 @@ const SignUp = (props) => {
 		validateOnChange: true,
 		validateOnBlur: true,
 		onSubmit: values => {
-			dispatch(signUp(values))
+			dispatch(signUp(values, !!referralUser && referralUser))
 		}
 	})
 
