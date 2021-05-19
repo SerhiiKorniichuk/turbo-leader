@@ -25,8 +25,8 @@ export const signUp = (newAccountData, referralUser) => {
 			.then(response => {
 				dispatch(watchLoading(false))
 				localStorageService.clearReferralUser()
-				alert(`Пользователь с ником ${response.data.username} создан!`)
 				history.push('/auth/sign-in')
+				alert(`Пользователь с ником ${response.data.username} создан!`)
 			})
 			.catch(error => {
 				dispatch(watchLoading(false))

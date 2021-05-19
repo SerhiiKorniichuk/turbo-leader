@@ -37,7 +37,7 @@ axios.interceptors.response.use(function (response) {
 
 	if (error.response.status === 401) {
 		localStorageService.clearStorage()
-		history.push('/')
+		history.push('/auth/sign-in')
 	}
 
 	return Promise.reject(error)
