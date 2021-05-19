@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, makeStyles, withStyles } from '@material-ui/core'
+import { Accordion, AccordionDetails, AccordionSummary, makeStyles, Typography, withStyles } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { ContactCard } from '../ContactCard/ContactCard'
 
@@ -44,6 +44,14 @@ export const ContactsList = (props) => {
 	const [expanded, setExpanded] = React.useState('')
 
 	const handleChange = (panel) => (event, newExpanded) => setExpanded(newExpanded ? panel : false)
+
+	if (props.list.length === 0 || !props.list) {
+		return (
+			<Typography variant="h6" align="center" color="textSecondary" component="p">
+				Нажаль список порожній...
+			</Typography>
+		)
+	}
 
 	return (
 		<div className={classes.root}>

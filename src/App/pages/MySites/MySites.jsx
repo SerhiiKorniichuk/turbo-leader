@@ -56,6 +56,14 @@ const MySites = () => {
 	const openSnackbar = () => setSnackbarView(true)
 	const closeSnackbar = () => setSnackbarView(false)
 
+	if (my_sites_list.length === 0 || !my_sites_list) {
+		return (
+			<Typography variant="h6" align="center" color="textSecondary" component="p">
+				Нажаль список порожній...
+			</Typography>
+		)
+	}
+
 	return (
 		<div className={classes.root}>
 			{ my_sites_list.map(site => (

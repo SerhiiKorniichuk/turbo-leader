@@ -1,14 +1,15 @@
 import { SET_AUTH_USER_DATA, SET_AUTH_USER_PAYMENT_STATUS, WATCH_LOADING } from './authReducer'
 
 
-export const setAuthUserData = ({ id, username, photo, is_paid }) => {
+export const setAuthUserData = ({ id, username, photo, is_paid, is_superuser }) => {
 	return {
 		type: SET_AUTH_USER_DATA,
 		is_logged: !!username,
 		id: id,
 		username: username,
 		photo: photo,
-		is_paid: is_paid
+		is_paid: is_paid,
+		is_superuser: is_superuser
 	}
 }
 

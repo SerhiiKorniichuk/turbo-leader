@@ -65,7 +65,15 @@ const EducationsList = (props) => {
 		dispatch(getEducationPostsList())
 	}, [dispatch])
 
-	if (is_loading) return <div />
+	if (is_loading) return null
+
+	if (education_posts_list.length === 0 || !education_posts_list) {
+		return (
+			<Typography variant="h6" align="center" color="textSecondary" component="p">
+				Нажаль список порожній...
+			</Typography>
+		)
+	}
 
 	return (
 		<Container>

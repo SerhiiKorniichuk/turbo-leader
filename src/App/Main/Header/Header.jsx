@@ -4,7 +4,10 @@ import { signOut } from '../../../store/auth/authThunks'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { drawerWidth } from '../Main'
-import { Toolbar, IconButton, Typography, AppBar, makeStyles, MenuItem, Menu, Avatar } from '@material-ui/core'
+import {
+	Toolbar, IconButton, Typography, AppBar, makeStyles,
+	MenuItem, Menu, Avatar, Divider, Link as MaterialLink
+} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import TLMiniLogo from './../../../assets/img/logos/TL-mini-logo.png'
 
@@ -58,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	userButtonText: {
 		marginRight: '10px'
+	},
+	divider: {
+		margin: '4px 0'
 	}
 }))
 
@@ -66,7 +72,7 @@ const Header = (props) => {
 
 	const classes = useStyles()
 
-	const { username, photo } = useSelector(state => state.auth)
+	const { username, photo, is_paid, is_superuser } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 
 	const [anchorEl, setAnchorEl] = useState(null)
@@ -127,6 +133,42 @@ const Header = (props) => {
 								Профіль
 							</MenuItem>
 						</Link>
+						{ is_paid &&
+							<div>
+								<Link to='/my_sites'>
+									<MenuItem onClick={handleClose}>
+										Мої сайти
+									</MenuItem>
+								</Link>
+								<Link to='/contacts'>
+									<MenuItem onClick={handleClose}>
+										Контакти
+									</MenuItem>
+								</Link>
+								<Link to='/education'>
+									<MenuItem onClick={handleClose}>
+										Навчання
+									</MenuItem>
+								</Link>
+							</div>
+						}
+						{ is_superuser &&
+							<div>
+								<Divider className={classes.divider} component='div' />
+								<MaterialLink
+									href='https://api-turbo-leader.herokuapp.com/admin'
+									target='_blank'
+									color='inherit'
+									component='a'
+									underline='none'
+								>
+									<MenuItem onClick={handleClose}>
+										Адмін панель
+									</MenuItem>
+								</MaterialLink>
+							</div>
+						}
+						<Divider className={classes.divider} component='div' />
 						<MenuItem onClick={onSignOut}>Вийти з аккаунту</MenuItem>
 					</Menu>
 				</div>

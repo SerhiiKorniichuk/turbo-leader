@@ -1,11 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
-import IconButton from '@material-ui/core/IconButton'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import Drawer from '@material-ui/core/Drawer'
-import { makeStyles } from '@material-ui/core/styles'
+import { ChevronLeft } from '@material-ui/icons'
+import { makeStyles, Drawer, Divider, List, IconButton } from '@material-ui/core'
 import { drawerWidth } from '../Main'
 import { SidebarNavigation } from './components/SidebarNavigation/SidebarNavigation'
 
@@ -55,7 +51,7 @@ const Sidebar = (props) => {
 		>
 			<div className={classes.toolbarIcon}>
 				<IconButton onClick={props.handleDrawerClose}>
-					<ChevronLeftIcon />
+					<ChevronLeft />
 				</IconButton>
 			</div>
 			<Divider />

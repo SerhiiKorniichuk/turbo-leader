@@ -12,7 +12,8 @@ let initialState = {
 	id: '',
 	username: '',
 	photo: '',
-	is_paid: false
+	is_paid: false,
+	is_superuser: false
 }
 
 
@@ -25,7 +26,8 @@ const authReducer = (state = initialState, actions) => {
 				id: actions.id,
 				username: actions.username,
 				photo: actions.photo,
-				is_paid: actions.is_paid
+				is_paid: actions.is_paid,
+				is_superuser: actions.is_superuser
 			}
 		case SET_AUTH_USER_PAYMENT_STATUS:
 			return {
